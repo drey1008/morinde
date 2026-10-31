@@ -64,9 +64,6 @@ p.lead{font-size:17px;line-height:1.5;color:var(--ink-2)}
 .q-emoji{width:64px;height:64px;border-radius:22px;display:grid;place-items:center;font-size:32px;margin-bottom:20px}
 .q-body h2{margin-bottom:8px}
 .q-hint{color:var(--ink-2);font-size:16px;margin-bottom:26px;line-height:1.45}
-.q-note{display:flex;gap:10px;align-items:flex-start;background:#F3EEFB;border-radius:18px;padding:12px 14px;margin:-12px 0 20px;font-size:14px;line-height:1.45;color:var(--ink-2);font-weight:600}
-.q-note span{font-size:18px;line-height:1.2}
-.age-tag{display:inline-flex;align-items:center;gap:6px;background:#E6DEF8;color:#4A3A7A;border-radius:99px;padding:6px 12px;font-weight:800;font-size:13px;margin:10px 0 0}
 .field{width:100%;padding:20px 22px;border-radius:var(--r-md);border:2px solid var(--line);background:#fff;font:700 20px 'Nunito';color:var(--ink);outline:none;transition:border .2s,box-shadow .2s}
 .field:focus{border-color:var(--peach-d);box-shadow:0 0 0 5px rgba(243,169,143,.18)}
 .chips{display:flex;flex-direction:column;gap:12px}
@@ -121,6 +118,7 @@ p.lead{font-size:17px;line-height:1.5;color:var(--ink-2)}
 .mom .tags{display:flex;flex-wrap:wrap;gap:6px}
 .mom .tag{font-size:12px;padding:5px 10px;border-width:0;background:#F6EFE9}
 .mom .tag.hit{background:var(--mint)}
+.soft-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.75);color:var(--ink-2);border-radius:99px;padding:6px 12px;font-weight:800;font-size:13px;margin-top:10px}
 .note{margin:18px 24px 0;font-size:13px;color:var(--ink-2);text-align:center;line-height:1.4}
 .m-foot{padding:14px 24px 30px;background:linear-gradient(180deg,rgba(255,247,240,0),var(--cream) 30%)}
 
@@ -262,7 +260,7 @@ p.lead{font-size:17px;line-height:1.5;color:var(--ink-2)}
   <div class="q-head">
     <button class="back" id="qBack" aria-label="Tilbage"><svg viewBox="0 0 24 24" fill="none" stroke="#3A3256" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
     <div class="progress"><b id="bar"></b></div>
-    <div class="q-count" id="qCount">1/12</div>
+    <div class="q-count" id="qCount">1/11</div>
   </div>
   <div class="q-body" id="qBody"></div>
   <div class="q-foot"><button class="btn" id="qNext" disabled>Næste</button></div>
@@ -285,7 +283,7 @@ p.lead{font-size:17px;line-height:1.5;color:var(--ink-2)}
       <span class="badge">✨ Vi har fundet en gruppe</span>
       <h1 id="mTitle">Mød dine mødre</h1>
       <p id="mSub"></p>
-      <div id="ageTag"></div>
+      <div id="softTag"></div>
     </div>
     <div class="group-card">
       <div class="gc-top">
@@ -326,7 +324,7 @@ p.lead{font-size:17px;line-height:1.5;color:var(--ink-2)}
 
 <script>
 const $=s=>document.querySelector(s);
-const state={baby:'',born:'',zip:'',meet:'',first:'',age:'',agePref:'',day:[],likes:[],lang:'',size:'',time:''};
+const state={baby:'',born:'',zip:'',meet:'',first:'',priority:'',day:[],likes:[],lang:'',size:'',time:''};
 
 /* ---------- Screens ---------- */
 function show(id){
@@ -359,8 +357,7 @@ const Q=[
  {k:'zip',t:'Hvor bor du?',h:'Dit postnummer, så gruppen ligger tæt på dig.',e:'🏡',c:'#D5EFE4',type:'zip',ph:'Fx 2300'},
  {k:'meet',t:'Hvordan vil du helst mødes?',h:'Du kan altid ændre det senere.',e:'🤝',c:'#DCEBFA',opts:[['🌳','Fysisk'],['💻','Online'],['✨','Begge dele']]},
  {k:'first',t:'Er det dit første barn?',h:'Så kan vi finde mødre i samme situation.',e:'💛',c:'#FFF0C2',opts:[['🌱','Ja, første gang'],['🌻','Nej, jeg har prøvet det før']]},
- {k:'age',t:'Hvilken aldersgruppe er du i?',h:'Så vi kan tage hensyn til det, hvis det betyder noget for dig eller de andre.',e:'🌷',c:'#DCEBFA',req:true,opts:[['🌱','Under 25'],['🌼','25 til 29'],['🌸','30 til 34'],['🌻','35 til 39'],['🌺','40 eller derover']]},
- {k:'agePref',t:'Hvor vigtig er alder for dig?',h:'Der er ingen forkerte svar.',n:'Hvis bare én i en gruppe ønsker en på sin alder, matcher vi hele gruppen inden for hendes aldersgruppe. Så bliver ingen skuffede.',e:'💞',c:'#FCDCCB',req:true,opts:[['🤝','Gerne en på min alder'],['⚖️','Det betyder lidt'],['🌈','Ligegyldigt, match mig på interesser']]},
+ {k:'priority',t:'Hvad betyder mest for dig i en mødregruppe?',h:'Der er ingen forkerte svar. Vi bruger det bare til at finde dem, du passer bedst med.',e:'💞',c:'#DCEBFA',opts:[['🌱','Nogen, der er i samme livsfase som mig'],['🌈','Nogen, der har de samme interesser'],['🤗','Jeg er åben for alle']]},
  {k:'day',t:'Hvordan ser en god mødregruppedag ud for dig?',h:'Vælg gerne flere.',e:'☕️',c:'#FCDCCB',multi:true,opts:[['🚶‍♀️','Gåtur med barnevogn'],['☕️','Kaffe på café'],['🧸','Legestue'],['🛋️','Hyggesnak derhjemme'],['🏊‍♀️','Babysvømning'],['🎶','Babysalmesang'],['🤸‍♀️','Mor og baby træning'],['📖','Biblioteket'],['🖼️','Museum'],['🧺','Picnic i parken'],['🥗','Frokost ude'],['💻','Online videosnak']]},
  {k:'likes',t:'Hvad kan du godt lide?',h:'Vælg gerne flere.',e:'🌈',c:'#E6DEF8',multi:true,opts:[['🧘‍♀️','Træning'],['🌿','Natur'],['🍝','Mad'],['🎨','Kreativitet'],['📚','Bøger'],['📺','Serier'],['✈️','Rejser'],['💼','Karriere']]},
  {k:'lang',t:'Hvilket sprog vil du tale i gruppen?',h:'',e:'💬',c:'#D5EFE4',opts:[['🇩🇰','Dansk'],['🇬🇧','Engelsk'],['🌍','Begge']]},
@@ -379,7 +376,7 @@ function renderQ(){
   const q=Q[qi];
   $('#bar').style.width=((qi+1)/Q.length*100)+'%';
   $('#qCount').textContent=(qi+1)+'/'+Q.length;
-  let html=`<div class="q-emoji" style="background:${q.c}">${q.e}</div><h2>${q.t}</h2>${q.h?`<p class="q-hint">${q.h}</p>`:'<div style="height:22px"></div>'}${q.n?`<div class="q-note"><span>💜</span><div>${q.n}</div></div>`:''}`;
+  let html=`<div class="q-emoji" style="background:${q.c}">${q.e}</div><h2>${q.t}</h2>${q.h?`<p class="q-hint">${q.h}</p>`:'<div style="height:22px"></div>'}`;
   if(q.type==='text')html+=`<input class="field" id="inp" placeholder="${q.ph}" value="${esc(state[q.k])}" autocomplete="off">`;
   else if(q.type==='zip')html+=`<input class="field" id="inp" inputmode="numeric" maxlength="4" placeholder="${q.ph}" value="${esc(state[q.k])}">`;
   else if(q.type==='date'){const t=new Date().toISOString().slice(0,10);html+=`<input class="field" id="inp" type="date" max="${t}" value="${state[q.k]}">`}
@@ -418,42 +415,25 @@ const MOMS=[
 ];
 const ALL_ACTS=['Gåtur med barnevogn','Kaffe på café','Legestue','Hyggesnak derhjemme','Babysvømning','Babysalmesang','Mor og baby træning','Biblioteket','Museum','Picnic i parken','Frokost ude','Online videosnak'];
 const ALL_LIKES=['Træning','Natur','Mad','Kreativitet','Bøger','Serier','Rejser','Karriere'];
-/* ---------- Age matching rule ----------
-   Hver mor vælger aldersgruppe og hvor vigtig alder er.
-   'Gerne en på min alder': hele gruppen skal være i hendes aldersgruppe, også dem der svarede 'Ligegyldigt'.
-   'Det betyder lidt': alder vægtes moderat (samme eller nabogruppe foretrækkes).
-   'Ligegyldigt': match på interesser, men følger reglen ovenfor hvis en anden i gruppen ønsker samme alder. */
-const AGE_BANDS=['Under 25','25 til 29','30 til 34','35 til 39','40 eller derover'];
-const STRICT='Gerne en på min alder',SOME='Det betyder lidt',ANY='Ligegyldigt, match mig på interesser';
-function ageRuleOk(group){
-  const strict=group.filter(m=>m.agePref===STRICT);
-  return strict.every(s=>group.every(m=>m.age===s.age));
-}
-function ageScore(a,b,pref){
-  const d=Math.abs(AGE_BANDS.indexOf(a)-AGE_BANDS.indexOf(b));
-  if(pref===SOME)return d===0?2:d===1?1:0;
+/* ---------- Hvad betyder mest ----------
+   Ingen hård regel. Mødre der vælger samme svar vægtes lidt højere sammen,
+   især 'Nogen, der er i samme livsfase som mig'. */
+const PRI_LIFE='Nogen, der er i samme livsfase som mig',PRI_INT='Nogen, der har de samme interesser',PRI_OPEN='Jeg er åben for alle';
+function priorityBonus(a,b){
+  if(a===b&&a===PRI_LIFE)return 3;
+  if(a===b)return 1;
   return 0;
 }
-function myBand(){return state.age||'30 til 34'}
-function momAges(n){
-  // Opdigtede eksempler: aldersgrupper og ønsker til de andre mødre i demoen
-  const me=AGE_BANDS.indexOf(myBand()),pref=state.agePref;
-  const near=i=>AGE_BANDS[Math.max(0,Math.min(4,me+i))];
-  let ages,prefs;
-  if(pref===STRICT){ages=Array(n).fill(myBand());prefs=[ANY,SOME,ANY,STRICT]}
-  else if(pref===SOME){ages=[myBand(),near(1),myBand(),near(-1)];prefs=[SOME,ANY,SOME,ANY]}
-  else{
-    // Ligegyldigt: Line ønsker samme alder, så hele gruppen holdes i samme aldersgruppe
-    ages=Array(n).fill(myBand());prefs=[ANY,SOME,STRICT,ANY];
-  }
-  return Array.from({length:n},(_,i)=>({age:ages[i%ages.length],agePref:prefs[i%prefs.length]}));
+function momPriorities(n){
+  // Opdigtede eksempler: demoen viser en gruppe, hvor de fleste søger det samme som dig
+  const me=state.priority||PRI_OPEN;
+  const other=me===PRI_LIFE?PRI_OPEN:PRI_LIFE;
+  return Array.from({length:n},(_,i)=>i===n-1&&me!==PRI_OPEN?other:me);
 }
-function ageInfo(ms){
-  const group=[{age:myBand(),agePref:state.agePref},...ms];
-  const same=group.every(m=>m.age===myBand());
-  if(!ageRuleOk(group))return {tag:'',fact:'Blandet'};
-  if(same)return {tag:'🤝 Samme aldersgruppe',fact:myBand()};
-  return {tag:'⚖️ Tæt på din alder',fact:'Omkring '+myBand()};
+function softTag(ms){
+  if(!state.priority||state.priority===PRI_OPEN)return '';
+  const same=ms.filter(m=>m.priority===state.priority).length;
+  return same>=ms.length/2?'🤝 I søger det samme':'';
 }
 function groupSize(){return state.size==='Lille (3 til 4)'?3:4}
 function moms(){
@@ -467,7 +447,7 @@ function moms(){
     const pick=myActs[i%myActs.length];
     if(!acts.includes(pick))acts=[pick,...acts.slice(0,2)];
     return {...m,likes,acts};
-  }).map((m,i,arr)=>({...m,...momAges(arr.length)[i]}));
+  }).map((m,i,arr)=>({...m,priority:momPriorities(arr.length)[i]}));
 }
 function babyAge(){
   if(!state.born)return '';
@@ -491,10 +471,10 @@ function startLoading(){
     ring.appendChild(s);
   });
   show('loading');
-  const steps=['Kigger efter babyer på samme alder','Finder mødre tæt på '+state.zip,'Tjekker jeres ønsker til alder','Matcher jeres interesser'];
+  const steps=['Kigger efter babyer på samme alder','Finder mødre tæt på '+state.zip,'Matcher jeres interesser'];
   let k=0;$('#loadStep').textContent=steps[0];
   const t=setInterval(()=>{k++;if(k<steps.length)$('#loadStep').textContent=steps[k]},900);
-  setTimeout(()=>{clearInterval(t);renderMatch();show('match')},3800);
+  setTimeout(()=>{clearInterval(t);renderMatch();show('match')},2900);
 }
 
 /* ---------- Match ---------- */
@@ -509,7 +489,7 @@ function renderMatch(){
   const ms=moms(),baby=state.baby.trim()||'din lille',age=babyAge();
   $('#mTitle').textContent='Hej til dig og '+baby+' 👋';
   $('#mSub').textContent=`Vi har fundet ${ms.length} mødre tæt på ${state.zip}, som har børn på samme alder som ${baby} og deler nogle af dine interesser.`;
-  const ai=ageInfo(ms);$('#ageTag').innerHTML=ai.tag?`<span class="age-tag">${ai.tag}</span>`:'';
+  const st=softTag(ms);$('#softTag').innerHTML=st?`<span class="soft-tag">${st}</span>`:'';
   $('#gName').textContent=groupName();
   $('#gStack').innerHTML=ms.map(m=>`<div class="av" style="background:${m.c}">${initial(m.n)}</div>`).join('');
   const meet={'Fysisk':'Fysisk','Online':'Online','Begge dele':'Fysisk og online'}[state.meet]||'Fysisk';
@@ -518,7 +498,6 @@ function renderMatch(){
     ['Område',state.zip||'Tæt på dig'],
     ['Mødes',meet],
     ['Tidspunkt',state.time||'Formiddag'],
-    ['Mødrenes alder',ageInfo(ms).fact+' år'],
     ['Sprog',state.lang==='Begge'?'Dansk og engelsk':(state.lang||'Dansk')],
     ['Første møde',mainAct()]
   ].map(([s,b])=>`<div class="fact"><small>${s}</small><b>${esc(b)}</b></div>`).join('');
@@ -531,7 +510,7 @@ function renderMatch(){
   $('#moms').innerHTML=ms.map(m=>{
     const shared=m.likes.filter(l=>state.likes.includes(l)).length+m.acts.filter(a=>state.day.includes(a)).length;
     return `<div class="mom"><div class="av" style="background:${m.c}">${initial(m.n)}</div><div>
-      <h3>${m.n}</h3><div class="sub">Mor til ${m.b}${age?', '+age:''} · ${m.age.replace(' eller derover','+')} år · ${shared} ting til fælles</div>
+      <h3>${m.n}</h3><div class="sub">Mor til ${m.b}${age?', '+age:''} · ${shared} ting til fælles</div>
       <div class="tags">${m.acts.filter(a=>state.day.includes(a)).map(a=>`<span class="tag hit">${a}</span>`).join('')}${m.likes.map(l=>`<span class="tag ${state.likes.includes(l)?'hit':''}">${l}</span>`).join('')}</div></div></div>`}).join('');
   $('.m-scroll').scrollTop=0;
 }
@@ -578,15 +557,14 @@ function send(text){
 $('#composer').onsubmit=e=>{e.preventDefault();send($('#chatInput').value)};
 $('#cBack').onclick=()=>show('match');
 
-/* ---------- Demo deep links (?demo=age|agepref|question|match|chat) ---------- */
+/* ---------- Demo deep links (?demo=priority|question|match|chat) ---------- */
 (function(){
   const d=new URLSearchParams(location.search).get('demo');
   if(!d)return;
-  Object.assign(state,{baby:'Alma',born:new Date(Date.now()-10*7*864e5).toISOString().slice(0,10),zip:'2300',meet:'Begge dele',first:'Ja, første gang',age:'30 til 34',agePref:'Gerne en på min alder',day:['Gåtur med barnevogn','Babysalmesang','Picnic i parken'],likes:['Natur','Bøger','Træning','Mad'],lang:'Dansk',size:'Mellem (5 til 6)',time:'Formiddag'});
+  Object.assign(state,{baby:'Alma',born:new Date(Date.now()-10*7*864e5).toISOString().slice(0,10),zip:'2300',meet:'Begge dele',first:'Ja, første gang',priority:'Nogen, der er i samme livsfase som mig',day:['Gåtur med barnevogn','Babysalmesang','Picnic i parken'],likes:['Natur','Bøger','Træning','Mad'],lang:'Dansk',size:'Mellem (5 til 6)',time:'Formiddag'});
   document.querySelectorAll('.screen').forEach(s=>s.style.transition='none');
-  if(d==='age'){qi=5;state.age='';renderQ();show('quiz')}
-  if(d==='agepref'){qi=6;state.agePref='';renderQ();show('quiz')}
-  if(d==='question'){qi=7;state.day=['Gåtur med barnevogn','Babysvømning','Picnic i parken'];renderQ();show('quiz')}
+  if(d==='priority'){qi=5;state.priority='';renderQ();show('quiz')}
+  if(d==='question'){qi=6;state.day=['Gåtur med barnevogn','Babysvømning','Picnic i parken'];renderQ();show('quiz')}
   if(d==='match'){renderMatch();show('match')}
   if(d==='chat'){renderChat();show('chat')}
 })();
