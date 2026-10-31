@@ -4,545 +4,166 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#FFF7F0">
-<title>MorInde · Klikbar prototype</title>
+<title>MorInde · Find din mødregruppe</title>
+<meta name="description" content="MorInde matcher dig med andre nybagte mødre ud fra jeres interesser og hverdag. Fysisk, online eller begge dele. Gratis for mødre.">
+<meta property="og:title" content="MorInde · Find din mødregruppe">
+<meta property="og:description" content="Bliv matchet med mødre, du faktisk passer med. Skriv dig på ventelisten.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --cream:#FFF7F0; --peach:#FCDCCB; --peach-d:#F3A98F; --coral:#E8806F;
-  --lav:#E6DEF8; --lav-d:#9C8AD6; --mint:#D5EFE4; --mint-d:#5DB394;
-  --sky:#DCEBFA; --butter:#FFF0C2; --ink:#3A3256; --ink-2:#6E6789; --line:#EFE4DA;
-  --r-lg:28px; --r-md:20px;
-}
+:root{--cream:#FFF7F0;--peach:#FCDCCB;--coral:#E8806F;--lav:#E6DEF8;--mint:#D5EFE4;--sky:#DCEBFA;--butter:#FFF0C2;--ink:#3A3256;--ink-2:#6E6789;--line:#EFE4DA}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%}
-body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:#EFE7F5;display:flex;justify-content:center;align-items:center;min-height:100%}
-.phone{position:relative;width:100%;max-width:430px;height:100dvh;max-height:932px;background:var(--cream);overflow:hidden;display:flex;flex-direction:column}
-@media (min-width:500px){.phone{height:860px;border-radius:44px;box-shadow:0 30px 80px rgba(58,50,86,.18),0 0 0 10px #fff}}
-h1,h2{font-family:'Fraunces',Georgia,serif;font-weight:700;letter-spacing:-.01em;line-height:1.15}
-h1{font-size:30px} h2{font-size:26px}
-p.lead{font-size:17px;line-height:1.5;color:var(--ink-2)}
-.screen{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateX(24px);transition:opacity .35s ease,transform .35s ease}
-.screen.active{opacity:1;pointer-events:auto;transform:none}
-.screen.leaving{transform:translateX(-24px)}
-.pad{padding:24px}
-.btn{appearance:none;border:0;width:100%;padding:18px 24px;border-radius:999px;font:800 17px 'Nunito',sans-serif;cursor:pointer;background:var(--ink);color:#fff;box-shadow:0 8px 20px rgba(58,50,86,.22);transition:transform .15s,opacity .2s,background .2s}
-.btn:active{transform:scale(.97)}
-.btn:disabled{opacity:.35;box-shadow:none;cursor:default}
-.btn.coral{background:var(--coral);box-shadow:0 8px 22px rgba(232,128,111,.35)}
-.btn.ghost{background:transparent;color:var(--ink-2);box-shadow:none;font-weight:700;padding:12px}
-.logo{display:flex;align-items:center;gap:8px;font:700 20px 'Fraunces',serif}
+body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.5}
+.wrap{max-width:560px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:700;letter-spacing:-.01em;line-height:1.15}
+a{color:inherit}
+header{padding:20px 0}
+.logo{display:flex;align-items:center;gap:8px;font:700 20px 'Fraunces',serif;text-decoration:none}
 .logo i{width:28px;height:28px;border-radius:50%;background:var(--coral);display:inline-grid;place-items:center;color:#fff;font-style:normal;font-size:14px}
-
-/* Welcome */
-#welcome{background:linear-gradient(180deg,var(--bgw,#FCE6DA) 0%,var(--cream) 62%);transition:background .5s}
-.w-top{display:flex;justify-content:space-between;align-items:center;padding:20px 24px 0}
-.skip{background:none;border:0;font:700 15px 'Nunito';color:var(--ink-2);cursor:pointer}
-.slides{flex:1;display:flex;transition:transform .45s cubic-bezier(.3,.8,.3,1);touch-action:pan-y}
-.slide{min-width:100%;display:flex;flex-direction:column;padding:8px 28px 0}
-.art{flex:1;display:grid;place-items:center;min-height:250px}
-.art svg{width:min(78%,300px);height:auto;filter:drop-shadow(0 14px 24px rgba(58,50,86,.08))}
-.slide h1{margin-bottom:12px}
-.w-bottom{padding:24px 28px 34px}
-.dots{display:flex;gap:8px;margin-bottom:24px}
-.dots span{height:8px;width:8px;border-radius:99px;background:#E2D5CB;transition:all .3s}
-.dots span.on{width:28px;background:var(--coral)}
-.float{animation:float 5s ease-in-out infinite}
-.float2{animation:float 6s ease-in-out infinite reverse}
-@keyframes float{50%{transform:translateY(-8px)}}
-
-/* Questions */
-#quiz{background:var(--cream)}
-.q-head{padding:20px 24px 0;display:flex;align-items:center;gap:14px}
-.back{width:42px;height:42px;border-radius:50%;border:0;background:#fff;box-shadow:0 2px 10px rgba(58,50,86,.08);display:grid;place-items:center;cursor:pointer;flex:none}
-.back svg{width:18px}
-.progress{flex:1;height:10px;background:#F1E5DB;border-radius:99px;overflow:hidden}
-.progress b{display:block;height:100%;width:10%;background:linear-gradient(90deg,var(--peach-d),var(--coral));border-radius:99px;transition:width .4s ease}
-.q-count{font-weight:800;font-size:14px;color:var(--ink-2);min-width:38px;text-align:right}
-.q-body{flex:1;padding:30px 24px 0;overflow-y:auto}
-.q-emoji{width:64px;height:64px;border-radius:22px;display:grid;place-items:center;font-size:32px;margin-bottom:20px}
-.q-body h2{margin-bottom:8px}
-.q-hint{color:var(--ink-2);font-size:16px;margin-bottom:26px;line-height:1.45}
-.field{width:100%;padding:20px 22px;border-radius:var(--r-md);border:2px solid var(--line);background:#fff;font:700 20px 'Nunito';color:var(--ink);outline:none;transition:border .2s,box-shadow .2s}
-.field:focus{border-color:var(--peach-d);box-shadow:0 0 0 5px rgba(243,169,143,.18)}
-.chips{display:flex;flex-direction:column;gap:12px}
-.chips.wrap{flex-direction:row;flex-wrap:wrap}
-.chip{appearance:none;border:2px solid var(--line);background:#fff;border-radius:var(--r-md);padding:18px 20px;font:700 17px 'Nunito';color:var(--ink);text-align:left;cursor:pointer;display:flex;align-items:center;gap:14px;transition:all .18s}
-.chips.wrap .chip{border-radius:999px;padding:13px 18px;font-size:16px}
-.chip .ic{font-size:22px}
-.chip .ck{margin-left:auto;width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center;transition:all .18s}
-.chip.sel{border-color:var(--coral);background:#FFF0EA;box-shadow:0 6px 16px rgba(232,128,111,.15)}
-.chip.sel .ck{background:var(--coral);border-color:var(--coral)}
-.chip.sel .ck:after{content:'';width:6px;height:11px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px)}
-.chip:active{transform:scale(.98)}
-.q-foot{padding:16px 24px 34px}
-
-/* Loading */
-#loading{background:linear-gradient(180deg,var(--lav),var(--cream));align-items:center;justify-content:center;text-align:center;padding:30px}
-.orbit{position:relative;width:220px;height:220px;margin-bottom:36px}
-.orbit .core{position:absolute;inset:70px;border-radius:50%;background:var(--coral);display:grid;place-items:center;color:#fff;font:700 30px 'Fraunces';box-shadow:0 0 0 14px rgba(232,128,111,.15),0 0 0 30px rgba(232,128,111,.07);animation:pulse 1.6s ease-in-out infinite}
-.orbit .ring{position:absolute;inset:0;animation:spin 6s linear infinite}
-.orbit .ring span{position:absolute;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font:800 16px 'Nunito';color:var(--ink);border:3px solid #fff}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes pulse{50%{transform:scale(1.06)}}
-.load-steps{list-style:none;margin-top:18px;font-weight:700;color:var(--ink-2);font-size:15px;min-height:24px}
-
-/* Match */
-#match{background:var(--cream)}
-.m-scroll{flex:1;overflow-y:auto;padding:0 0 20px}
-.m-hero{background:linear-gradient(160deg,var(--peach) 0%,var(--lav) 100%);padding:26px 24px 70px;border-radius:0 0 36px 36px;position:relative}
-.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.75);border-radius:99px;padding:6px 12px;font-weight:800;font-size:13px;margin-bottom:14px}
-.m-hero h1{font-size:28px;margin-bottom:8px}
-.m-hero p{color:var(--ink-2);font-size:16px;line-height:1.45}
-.group-card{margin:-50px 18px 0;background:#fff;border-radius:var(--r-lg);padding:22px;box-shadow:0 14px 40px rgba(58,50,86,.10);position:relative}
-.gc-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
-.gc-top .stack .av{width:38px;height:38px;font-size:14px;margin-left:-10px}.gc-top .stack .av:first-child{margin-left:0}
-.gc-name{font:700 20px 'Fraunces'}
-.stack{display:flex}
-.av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font:800 16px 'Nunito';color:var(--ink);border:3px solid #fff;flex:none}
-.stack .av{margin-left:-12px}.stack .av:first-child{margin-left:0}
-.facts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.fact{background:var(--cream);border-radius:16px;padding:12px 14px}
-.fact small{display:block;font-size:12px;font-weight:800;color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
-.fact b{font-size:15px}
-.sec-t{font:700 19px 'Fraunces';margin:26px 24px 12px}
-.shared{display:flex;flex-wrap:wrap;gap:8px;padding:0 24px}
-.tag{padding:8px 14px;border-radius:99px;font-weight:800;font-size:14px;background:#fff;border:2px solid var(--line);color:var(--ink-2)}
-.tag.hit{background:var(--mint);border-color:var(--mint);color:#22644C}
-.moms{display:flex;flex-direction:column;gap:12px;padding:0 18px}
-.mom{background:#fff;border-radius:var(--r-md);padding:16px;display:flex;gap:14px;align-items:flex-start;box-shadow:0 4px 14px rgba(58,50,86,.05)}
-.mom .av{width:52px;height:52px;font-size:19px;border:0}
-.mom h3{font-size:17px;font-weight:800}
-.mom .sub{font-size:14px;color:var(--ink-2);margin:2px 0 8px}
-.mom .tags{display:flex;flex-wrap:wrap;gap:6px}
-.mom .tag{font-size:12px;padding:5px 10px;border-width:0;background:#F6EFE9}
-.mom .tag.hit{background:var(--mint)}
-.note{margin:18px 24px 0;font-size:13px;color:var(--ink-2);text-align:center;line-height:1.4}
-.m-foot{padding:14px 24px 30px;background:linear-gradient(180deg,rgba(255,247,240,0),var(--cream) 30%)}
-
-/* Chat */
-#chat{background:#FBF5FF}
-.c-head{display:flex;align-items:center;gap:12px;padding:16px 18px;background:#fff;border-bottom:1px solid #EEE6F5}
-.c-head .stack .av{width:34px;height:34px;font-size:13px;margin-left:-10px;border-width:2px}
-.c-head .stack .av:first-child{margin-left:0}
-.c-title{flex:1;min-width:0}
-.c-title b{display:block;font-size:16px}
-.c-title small{color:var(--ink-2);font-size:13px}
-.msgs{flex:1;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:10px}
-.day{align-self:center;font-size:12px;font-weight:800;color:var(--ink-2);background:#fff;padding:5px 12px;border-radius:99px;margin-bottom:6px}
-.sys{align-self:center;text-align:center;font-size:13px;color:var(--ink-2);background:var(--butter);padding:10px 14px;border-radius:16px;max-width:88%;line-height:1.4}
-.msg{display:flex;gap:8px;align-items:flex-end;max-width:84%}
-.msg .av{width:30px;height:30px;font-size:12px;border:0}
-.bub{background:#fff;padding:11px 15px;border-radius:20px 20px 20px 6px;font-size:15.5px;line-height:1.4;box-shadow:0 2px 8px rgba(58,50,86,.05)}
-.bub .who{display:block;font-size:12px;font-weight:800;color:var(--lav-d);margin-bottom:2px}
-.msg.me{align-self:flex-end;flex-direction:row-reverse}
-.msg.me .bub{background:var(--coral);color:#fff;border-radius:20px 20px 6px 20px}
-.msg.pop{animation:pop .3s ease}
-@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.97)}}
-.typing .bub{display:flex;gap:4px;padding:14px 16px}
-.typing i{width:7px;height:7px;border-radius:50%;background:#C9BFE0;animation:blink 1.2s infinite}
-.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
-@keyframes blink{50%{opacity:.3}}
-.quick{display:flex;gap:8px;overflow-x:auto;padding:0 16px 10px;scrollbar-width:none}
-.quick button{flex:none;border:2px solid #E6DEF8;background:#fff;border-radius:99px;padding:8px 14px;font:700 14px 'Nunito';color:var(--ink);cursor:pointer}
-.composer{display:flex;gap:10px;padding:10px 14px 26px;background:#fff;border-top:1px solid #EEE6F5}
-.composer input{flex:1;border:0;background:#F5EFFA;border-radius:99px;padding:14px 18px;font:600 16px 'Nunito';color:var(--ink);outline:none}
-.send{width:50px;height:50px;border-radius:50%;border:0;background:var(--coral);display:grid;place-items:center;cursor:pointer;flex:none}
-.send svg{width:20px;fill:#fff}
-.proto-tag{position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(58,50,86,.35);pointer-events:none;z-index:5}
+.hero{background:linear-gradient(180deg,#FCE6DA 0%,#F3E9F8 55%,var(--cream) 100%);padding-bottom:28px}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.75);border-radius:99px;padding:6px 12px;font-weight:800;font-size:13px;margin:12px 0 16px}
+.hero h1{font-size:40px;margin-bottom:14px}
+.lead{font-size:18px;color:var(--ink-2);margin-bottom:24px}
+.art{display:flex;justify-content:center;gap:-10px;margin:6px 0 26px}
+.art span{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-size:30px;border:4px solid var(--cream);margin-left:-12px;box-shadow:0 8px 20px rgba(58,50,86,.08)}
+.art span:first-child{margin-left:0}
+.btn{appearance:none;border:0;display:block;width:100%;text-align:center;text-decoration:none;padding:18px 24px;border-radius:999px;font:800 17px 'Nunito',sans-serif;cursor:pointer;background:var(--ink);color:#fff;box-shadow:0 8px 20px rgba(58,50,86,.22);transition:transform .15s,opacity .2s}
+.btn:active{transform:scale(.97)}
+.btn.coral{background:var(--coral);box-shadow:0 8px 22px rgba(232,128,111,.35)}
+.btn.light{background:#fff;color:var(--ink);box-shadow:0 4px 14px rgba(58,50,86,.08)}
+.btn:disabled{opacity:.5;cursor:default}
+.btns{display:grid;gap:12px}
+section{padding:34px 0}
+section h2{font-size:28px;margin-bottom:18px}
+.cards{display:grid;gap:14px}
+.card{display:flex;gap:16px;align-items:flex-start;background:#fff;border-radius:24px;padding:18px;box-shadow:0 4px 18px rgba(58,50,86,.06)}
+.card .ic{flex:none;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:26px}
+.card h3{font-size:19px;margin-bottom:4px}
+.card p{color:var(--ink-2);font-size:15px}
+.free{background:var(--mint);border-radius:24px;padding:18px 20px;font-weight:700;color:#22644C;display:flex;gap:12px;align-items:center}
+.free span{font-size:24px}
+.form-card{background:#fff;border-radius:28px;padding:24px;box-shadow:0 10px 30px rgba(58,50,86,.08)}
+.form-card p.sub{color:var(--ink-2);margin:-8px 0 20px}
+label.f{display:block;font-weight:800;font-size:15px;margin:0 0 8px}
+.field{width:100%;padding:16px 18px;border-radius:18px;border:2px solid var(--line);background:var(--cream);font:700 17px 'Nunito',sans-serif;color:var(--ink);margin-bottom:18px;outline:none}
+.field:focus{border-color:#C9B8EE;background:#fff}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip span{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 10px;border-radius:18px;border:2px solid var(--line);background:var(--cream);font-weight:800;font-size:15px;cursor:pointer;text-align:center;transition:all .2s}
+.chip input:checked+span{border-color:var(--coral);background:#FDEBE4}
+.chip input:focus-visible+span{outline:3px solid #C9B8EE}
+.consent{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--ink-2);margin:4px 0 20px;cursor:pointer}
+.consent input{flex:none;width:22px;height:22px;margin-top:1px;accent-color:var(--coral)}
+.err{color:#B4483A;font-weight:700;font-size:14px;margin:-6px 0 14px;display:none}
+.thanks{display:none;text-align:center;padding:10px 0}
+.thanks .big{font-size:52px;margin-bottom:10px}
+.thanks h3{font-size:26px;margin-bottom:8px}
+.thanks p{color:var(--ink-2)}
+.hp{position:absolute;left:-9999px}
+footer{padding:30px 0 40px;text-align:center;font-size:14px;color:var(--ink-2)}
+footer a{color:var(--ink-2)}
+footer .links{margin-bottom:10px;display:flex;gap:18px;justify-content:center}
+@media (min-width:700px){.hero h1{font-size:48px}}
 </style>
 </head>
 <body>
-<div class="phone" id="app">
 
-<!-- WELCOME -->
-<section class="screen active" id="welcome">
-  <div class="w-top">
-    <div class="logo"><i>♡</i>MorInde</div>
-    <button class="skip" id="skipBtn">Spring over</button>
-  </div>
-  <div class="slides" id="slides">
-    <div class="slide">
-      <div class="art">
-        <svg viewBox="0 0 300 260">
-          <circle cx="150" cy="135" r="112" fill="#fff" opacity=".7"/>
-          <circle class="float2" cx="62" cy="58" r="16" fill="#FFF0C2"/>
-          <path class="float" d="M238 40c0 14-10 22-22 22 8-4 12-12 12-22s-4-17-12-21c12 0 22 8 22 21z" fill="#E6DEF8"/>
-          <g class="float">
-            <circle cx="112" cy="128" r="44" fill="#FCDCCB"/>
-            <circle cx="112" cy="104" r="20" fill="#F3A98F"/>
-            <path d="M80 168c4-22 18-34 32-34s28 12 32 34z" fill="#F3A98F"/>
-          </g>
-          <g class="float2">
-            <circle cx="190" cy="138" r="44" fill="#D5EFE4"/>
-            <circle cx="190" cy="114" r="20" fill="#5DB394"/>
-            <path d="M158 178c4-22 18-34 32-34s28 12 32 34z" fill="#5DB394"/>
-          </g>
-          <path d="M150 210c-10-8-26-18-26-30 0-7 6-12 12-12 6 0 10 3 14 8 4-5 8-8 14-8 6 0 12 5 12 12 0 12-16 22-26 30z" fill="#E8806F"/>
-          <circle cx="250" cy="200" r="7" fill="#F3A98F"/><circle cx="46" cy="190" r="5" fill="#9C8AD6"/>
-        </svg>
-      </div>
-      <h1>Velkommen til MorInde</h1>
-      <p class="lead">Find mødre, der er lige der, hvor du er. Med børn på samme alder og interesser, der minder om dine.</p>
-    </div>
-    <div class="slide">
-      <div class="art">
-        <svg viewBox="0 0 300 260">
-          <circle cx="150" cy="130" r="112" fill="#fff" opacity=".7"/>
-          <g class="float">
-            <rect x="46" y="78" width="98" height="120" rx="22" fill="#FCDCCB"/>
-            <circle cx="95" cy="120" r="18" fill="#fff"/>
-            <path d="M74 162h42" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
-            <path d="M70 70c10-20 40-20 50 0" stroke="#5DB394" stroke-width="7" fill="none" stroke-linecap="round"/>
-          </g>
-          <g class="float2">
-            <rect x="160" y="62" width="96" height="140" rx="20" fill="#E6DEF8"/>
-            <rect x="172" y="78" width="72" height="90" rx="12" fill="#fff"/>
-            <circle cx="208" cy="112" r="14" fill="#9C8AD6"/>
-            <path d="M190 150c4-12 12-16 18-16s14 4 18 16z" fill="#9C8AD6"/>
-            <circle cx="208" cy="186" r="6" fill="#fff"/>
-          </g>
-          <path d="M140 222c10 6 22 6 32 0" stroke="#E8806F" stroke-width="6" fill="none" stroke-linecap="round"/>
-          <circle cx="40" cy="60" r="8" fill="#FFF0C2"/><circle cx="262" cy="226" r="6" fill="#F3A98F"/>
-        </svg>
-      </div>
-      <h1>Din mødregruppe, dit valg</h1>
-      <p class="lead">Mød hinanden i virkeligheden, online eller begge dele. Du bestemmer.</p>
-    </div>
-    <div class="slide">
-      <div class="art">
-        <svg viewBox="0 0 300 260">
-          <circle cx="150" cy="130" r="112" fill="#fff" opacity=".7"/>
-          <g class="float">
-            <path d="M52 70h120a20 20 0 0 1 20 20v44a20 20 0 0 1-20 20H96l-26 22v-22H52a20 20 0 0 1-20-20V90a20 20 0 0 1 20-20z" fill="#FCDCCB"/>
-            <circle cx="82" cy="112" r="7" fill="#E8806F"/><circle cx="112" cy="112" r="7" fill="#E8806F"/><circle cx="142" cy="112" r="7" fill="#E8806F"/>
-          </g>
-          <g class="float2">
-            <path d="M248 128H140a18 18 0 0 0-18 18v36a18 18 0 0 0 18 18h68l24 20v-20h16a18 18 0 0 0 18-18v-36a18 18 0 0 0-18-18z" fill="#D5EFE4"/>
-            <path d="M178 166c-6-5-14-10-14-17 0-4 3-7 7-7s6 2 7 4c1-2 4-4 7-4 4 0 7 3 7 7 0 7-8 12-14 17z" fill="#5DB394"/>
-            <path d="M206 160h30" stroke="#5DB394" stroke-width="6" stroke-linecap="round"/>
-          </g>
-          <circle cx="252" cy="62" r="10" fill="#FFF0C2"/><circle cx="44" cy="206" r="6" fill="#9C8AD6"/>
-        </svg>
-      </div>
-      <h1>Lær hinanden at kende først</h1>
-      <p class="lead">Skriv sammen i appen, før I mødes. Så er det første møde lidt nemmere.</p>
-    </div>
-    <div class="slide">
-      <div class="art">
-        <svg viewBox="0 0 300 260">
-          <circle cx="150" cy="130" r="112" fill="#fff" opacity=".7"/>
-          <g class="float">
-            <circle cx="150" cy="128" r="72" fill="#FFF0C2"/>
-            <circle cx="150" cy="128" r="56" fill="#fff"/>
-            <path d="M150 92v36l24 16" stroke="#E8806F" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="150" cy="128" r="7" fill="#3A3256"/>
-          </g>
-          <path class="float2" d="M58 70l6 14 14 6-14 6-6 14-6-14-14-6 14-6z" fill="#9C8AD6"/>
-          <path class="float" d="M242 178l5 11 11 5-11 5-5 11-5-11-11-5 11-5z" fill="#5DB394"/>
-          <circle cx="246" cy="66" r="8" fill="#F3A98F"/>
-        </svg>
-      </div>
-      <h1>Det tager kun et par minutter</h1>
-      <p class="lead">Svar på nogle få spørgsmål, så finder vi de mødre, der passer bedst til dig.</p>
+<div class="hero">
+  <div class="wrap">
+    <header><a class="logo" href="/"><i>♡</i>MorInde</a></header>
+    <span class="badge">🌱 Kommer snart i hele Danmark</span>
+    <h1>Find din mødregruppe</h1>
+    <p class="lead">MorInde matcher dig med andre nybagte mødre, du passer godt med. Ud fra jeres interesser, hverdag og hvor I bor.</p>
+    <div class="art" aria-hidden="true"><span style="background:var(--peach)">🍼</span><span style="background:var(--lav)">☕️</span><span style="background:var(--mint)">🌳</span><span style="background:var(--butter)">💛</span></div>
+    <div class="btns">
+      <a class="btn coral" href="#venteliste">Skriv mig på ventelisten</a>
+      <a class="btn light" href="/prove/">Prøv prototypen</a>
     </div>
   </div>
-  <div class="w-bottom">
-    <div class="dots" id="dots"><span class="on"></span><span></span><span></span><span></span></div>
-    <button class="btn" id="wNext">Næste</button>
-  </div>
-</section>
-
-<!-- QUIZ -->
-<section class="screen" id="quiz">
-  <div class="q-head">
-    <button class="back" id="qBack" aria-label="Tilbage"><svg viewBox="0 0 24 24" fill="none" stroke="#3A3256" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
-    <div class="progress"><b id="bar"></b></div>
-    <div class="q-count" id="qCount">1/10</div>
-  </div>
-  <div class="q-body" id="qBody"></div>
-  <div class="q-foot"><button class="btn" id="qNext" disabled>Næste</button></div>
-</section>
-
-<!-- LOADING -->
-<section class="screen" id="loading">
-  <div class="orbit">
-    <div class="ring" id="ring"></div>
-    <div class="core">♡</div>
-  </div>
-  <h2>Vi finder din gruppe</h2>
-  <ul class="load-steps"><li id="loadStep">Kigger efter babyer på samme alder</li></ul>
-</section>
-
-<!-- MATCH -->
-<section class="screen" id="match">
-  <div class="m-scroll">
-    <div class="m-hero">
-      <span class="badge">✨ Vi har fundet en gruppe</span>
-      <h1 id="mTitle">Mød dine mødre</h1>
-      <p id="mSub"></p>
-    </div>
-    <div class="group-card">
-      <div class="gc-top">
-        <div class="gc-name" id="gName">Barnevognsbanden</div>
-        <div class="stack" id="gStack"></div>
-      </div>
-      <div class="facts" id="facts"></div>
-    </div>
-    <div class="sec-t">Det kan I lave sammen</div>
-    <div class="shared" id="sharedActs"></div>
-    <div class="sec-t">I har det her til fælles</div>
-    <div class="shared" id="shared"></div>
-    <div class="sec-t">Mødrene i gruppen</div>
-    <div class="moms" id="moms"></div>
-    <p class="note">Prototype: navne og profiler er opdigtede eksempler.</p>
-  </div>
-  <div class="m-foot">
-    <button class="btn coral" id="toChat">Sig hej i gruppechatten</button>
-  </div>
-</section>
-
-<!-- CHAT -->
-<section class="screen" id="chat">
-  <div class="c-head">
-    <button class="back" id="cBack" aria-label="Tilbage"><svg viewBox="0 0 24 24" fill="none" stroke="#3A3256" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
-    <div class="c-title"><b id="cName">Barnevognsbanden</b><small id="cMembers"></small></div>
-    <div class="stack" id="cStack"></div>
-  </div>
-  <div class="msgs" id="msgs"></div>
-  <div class="quick" id="quick"></div>
-  <form class="composer" id="composer">
-    <input id="chatInput" placeholder="Skriv en besked" autocomplete="off">
-    <button class="send" aria-label="Send"><svg viewBox="0 0 24 24"><path d="M3.4 20.4l17.4-7.5c.8-.4.8-1.5 0-1.8L3.4 3.6c-.7-.3-1.4.3-1.3 1l1.2 6.1 9.2 1.3-9.2 1.3-1.2 6.1c-.1.7.6 1.3 1.3 1z"/></svg></button>
-  </form>
-</section>
-
 </div>
 
+<main class="wrap">
+  <section>
+    <h2>Sådan hjælper MorInde dig</h2>
+    <div class="cards">
+      <div class="card"><div class="ic" style="background:var(--peach)">🧺</div><div><h3>Matchet på det, der betyder noget</h3><p>Du fortæller lidt om dine interesser og din hverdag. Så finder vi mødre med børn på samme alder tæt på dig.</p></div></div>
+      <div class="card"><div class="ic" style="background:var(--sky)">🤝</div><div><h3>Mød jer, som det passer dig</h3><p>Vælg om I vil mødes fysisk, online eller begge dele.</p></div></div>
+      <div class="card"><div class="ic" style="background:var(--lav)">💬</div><div><h3>Lær hinanden at kende først</h3><p>Snak sammen i gruppechatten, før I mødes. Så er første møde lidt nemmere.</p></div></div>
+    </div>
+  </section>
+
+  <div class="free"><span>💛</span><div>MorInde er gratis for mødre.</div></div>
+
+  <section id="venteliste">
+    <div class="form-card">
+      <form id="wl" novalidate>
+        <h2>Skriv dig på ventelisten</h2>
+        <p class="sub">Vi giver dig besked, når MorInde åbner.</p>
+        <label class="f" for="email">Din email</label>
+        <input class="field" id="email" name="email" type="email" autocomplete="email" placeholder="navn@email.dk" required>
+        <label class="f" for="zip">Postnummer</label>
+        <input class="field" id="zip" name="postnummer" inputmode="numeric" maxlength="4" autocomplete="postal-code" placeholder="Fx 2300" required>
+        <label class="f" id="statusLbl">Hvor er du lige nu?</label>
+        <div class="chips" role="radiogroup" aria-labelledby="statusLbl">
+          <label class="chip"><input type="radio" name="status" value="Gravid" required><span>🤰 Gravid</span></label>
+          <label class="chip"><input type="radio" name="status" value="Har fået barn"><span>👶 Har fået barn</span></label>
+        </div>
+        <label class="consent"><input type="checkbox" id="consent" name="samtykke" value="ja" required><span>Jeg vil gerne skrives på ventelisten, og jeg har læst <a href="/privatliv/">privatlivspolitikken</a>.</span></label>
+        <input class="hp" type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="err" id="err"></p>
+        <button class="btn coral" id="send" type="submit">Skriv mig på listen</button>
+      </form>
+      <div class="thanks" id="thanks" role="status">
+        <div class="big">🎉</div>
+        <h3>Tak, du er på listen!</h3>
+        <p>Vi giver dig besked, så snart MorInde åbner. Indtil da kan du klikke prototypen igennem.</p>
+        <a class="btn light" style="margin-top:18px" href="/prove/">Prøv prototypen</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="links"><a href="/prove/">Prototype</a><a href="/privatliv/">Privatliv</a></div>
+  <div>Lavet med 💛 af <a href="https://edwebworks.com" target="_blank" rel="noopener">ED.</a></div>
+</footer>
+
 <script>
-const $=s=>document.querySelector(s);
-const state={baby:'',born:'',zip:'',meet:'',first:'',day:[],likes:[],lang:'',size:'',time:''};
+/* ============================================================
+   VENTELISTE: indsæt formular-endpoint her (kun én linje at ændre).
+   Formspree:  'https://formspree.io/f/DIT_FORM_ID'
+   Web3Forms:  'https://api.web3forms.com/submit'  (+ udfyld ACCESS_KEY nedenfor)
+   Tom streng = ventelisten er ikke koblet på endnu, intet bliver sendt.
+   ============================================================ */
+const FORM_ENDPOINT='';
+const WEB3FORMS_ACCESS_KEY=''; // kun til Web3Forms
 
-/* ---------- Screens ---------- */
-function show(id){
-  const cur=document.querySelector('.screen.active');
-  if(cur){cur.classList.add('leaving');cur.classList.remove('active');setTimeout(()=>cur.classList.remove('leaving'),400)}
-  $('#'+id).classList.add('active');
-}
-
-/* ---------- Welcome ---------- */
-let slide=0;const bgs=['#FCE6DA','#E6DEF8','#D5EFE4','#FFF0C2'];
-function setSlide(i){
-  slide=Math.max(0,Math.min(3,i));
-  $('#slides').style.transform=`translateX(${-100*slide}%)`;
-  document.querySelectorAll('#dots span').forEach((d,k)=>d.classList.toggle('on',k===slide));
-  $('#welcome').style.setProperty('--bgw',bgs[slide]);
-  $('#wNext').textContent=slide===3?'Kom i gang':'Næste';
-  $('#wNext').classList.toggle('coral',slide===3);
-  $('#skipBtn').style.visibility=slide===3?'hidden':'visible';
-}
-$('#wNext').onclick=()=>slide<3?setSlide(slide+1):startQuiz();
-$('#skipBtn').onclick=()=>setSlide(3);
-let sx=null;
-$('#slides').addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
-$('#slides').addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>45)setSlide(slide+(dx<0?1:-1));sx=null});
-
-/* ---------- Questions ---------- */
-const Q=[
- {k:'baby',t:'Hvad hedder din lille?',h:'Navn eller kaldenavn, så vi kan sige hej til jer begge.',e:'🍼',c:'#FCDCCB',type:'text',ph:'Fx Alma'},
- {k:'born',t:'Hvornår kom din baby til verden?',h:'Så du matches med mødre, hvis børn er på samme alder.',e:'🎈',c:'#E6DEF8',type:'date'},
- {k:'zip',t:'Hvor bor du?',h:'Dit postnummer, så gruppen ligger tæt på dig.',e:'🏡',c:'#D5EFE4',type:'zip',ph:'Fx 2300'},
- {k:'meet',t:'Hvordan vil du helst mødes?',h:'Du kan altid ændre det senere.',e:'🤝',c:'#DCEBFA',opts:[['🌳','Fysisk'],['💻','Online'],['✨','Begge dele']]},
- {k:'first',t:'Er det dit første barn?',h:'Så kan vi finde mødre i samme situation.',e:'💛',c:'#FFF0C2',opts:[['🌱','Ja, første gang'],['🌻','Nej, jeg har prøvet det før']]},
- {k:'day',t:'Hvordan ser en god mødregruppedag ud for dig?',h:'Vælg gerne flere.',e:'☕️',c:'#FCDCCB',multi:true,opts:[['🚶‍♀️','Gåtur med barnevogn'],['☕️','Kaffe på café'],['🧸','Legestue'],['🛋️','Hyggesnak derhjemme'],['🏊‍♀️','Babysvømning'],['🎶','Babysalmesang'],['🤸‍♀️','Mor og baby træning'],['📖','Biblioteket'],['🖼️','Museum'],['🧺','Picnic i parken'],['🥗','Frokost ude'],['💻','Online videosnak']]},
- {k:'likes',t:'Hvad kan du godt lide?',h:'Vælg gerne flere.',e:'🌈',c:'#E6DEF8',multi:true,opts:[['🧘‍♀️','Træning'],['🌿','Natur'],['🍝','Mad'],['🎨','Kreativitet'],['📚','Bøger'],['📺','Serier'],['✈️','Rejser'],['💼','Karriere']]},
- {k:'lang',t:'Hvilket sprog vil du tale i gruppen?',h:'',e:'💬',c:'#D5EFE4',opts:[['🇩🇰','Dansk'],['🇬🇧','Engelsk'],['🌍','Begge']]},
- {k:'size',t:'Hvor stor skal gruppen være?',h:'',e:'👭',c:'#DCEBFA',opts:[['🌸','Lille (3 til 4)'],['🌼','Mellem (5 til 6)'],['🤍','Det er lige meget']]},
- {k:'time',t:'Hvornår passer det dig bedst at mødes?',h:'Sidste spørgsmål!',e:'🗓️',c:'#FFF0C2',opts:[['🌤️','Formiddag'],['☀️','Eftermiddag'],['🧺','Weekend']]}
-];
-let qi=0;
-function startQuiz(){qi=0;renderQ();show('quiz')}
-function valid(q){
-  const v=state[q.k];
-  if(q.type==='zip')return /^\d{4}$/.test(v);
-  if(q.multi)return v.length>0;
-  return !!(v&&String(v).trim());
-}
-function renderQ(){
-  const q=Q[qi];
-  $('#bar').style.width=((qi+1)/Q.length*100)+'%';
-  $('#qCount').textContent=(qi+1)+'/'+Q.length;
-  let html=`<div class="q-emoji" style="background:${q.c}">${q.e}</div><h2>${q.t}</h2>${q.h?`<p class="q-hint">${q.h}</p>`:'<div style="height:22px"></div>'}`;
-  if(q.type==='text')html+=`<input class="field" id="inp" placeholder="${q.ph}" value="${esc(state[q.k])}" autocomplete="off">`;
-  else if(q.type==='zip')html+=`<input class="field" id="inp" inputmode="numeric" maxlength="4" placeholder="${q.ph}" value="${esc(state[q.k])}">`;
-  else if(q.type==='date'){const t=new Date().toISOString().slice(0,10);html+=`<input class="field" id="inp" type="date" max="${t}" value="${state[q.k]}">`}
-  else{
-    html+=`<div class="chips ${q.multi?'wrap':''}">`+q.opts.map(([ic,l])=>{
-      const s=q.multi?state[q.k].includes(l):state[q.k]===l;
-      return `<button class="chip ${s?'sel':''}" data-v="${l}"><span class="ic">${ic}</span>${l}${q.multi?'':'<span class="ck"></span>'}</button>`}).join('')+`</div>`;
-  }
-  $('#qBody').innerHTML=html;$('#qBody').scrollTop=0;
-  const inp=$('#inp');
-  if(inp){
-    inp.oninput=()=>{if(q.type==='zip')inp.value=inp.value.replace(/\D/g,'');state[q.k]=inp.value;upd()};
-    inp.onkeydown=e=>{if(e.key==='Enter'&&valid(q))next()};
-  }
-  document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{
-    const v=b.dataset.v;
-    if(q.multi){const a=state[q.k];a.includes(v)?a.splice(a.indexOf(v),1):a.push(v);b.classList.toggle('sel')}
-    else{state[q.k]=v;document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('sel',c===b));upd();setTimeout(next,320);return}
-    upd();
-  });
-  $('#qNext').textContent=qi===Q.length-1?'Find min gruppe':'Næste';
-  upd();
-}
-function upd(){$('#qNext').disabled=!valid(Q[qi])}
-function next(){if(!valid(Q[qi]))return;if(qi<Q.length-1){qi++;renderQ()}else startLoading()}
-$('#qNext').onclick=next;
-$('#qBack').onclick=()=>{if(qi>0){qi--;renderQ()}else{show('welcome')}};
-function esc(s){return String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
-
-/* ---------- Fictional group ---------- */
-const MOMS=[
- {n:'Sofie',b:'Ella',c:'#FCDCCB',likes:['Natur','Bøger','Mad','Træning'],acts:['Gåtur med barnevogn','Picnic i parken','Babysalmesang']},
- {n:'Amira',b:'Noah',c:'#E6DEF8',likes:['Kreativitet','Mad','Rejser','Serier'],acts:['Kaffe på café','Museum','Frokost ude']},
- {n:'Line',b:'Karla',c:'#D5EFE4',likes:['Træning','Karriere','Natur','Serier'],acts:['Mor og baby træning','Babysvømning','Gåtur med barnevogn']},
- {n:'Maja',b:'Oscar',c:'#FFF0C2',likes:['Bøger','Kreativitet','Rejser','Karriere'],acts:['Biblioteket','Legestue','Hyggesnak derhjemme']}
-];
-const ALL_ACTS=['Gåtur med barnevogn','Kaffe på café','Legestue','Hyggesnak derhjemme','Babysvømning','Babysalmesang','Mor og baby træning','Biblioteket','Museum','Picnic i parken','Frokost ude','Online videosnak'];
-const ALL_LIKES=['Træning','Natur','Mad','Kreativitet','Bøger','Serier','Rejser','Karriere'];
-function groupSize(){return state.size==='Lille (3 til 4)'?3:4}
-function moms(){
-  // make sure each mom shares at least one of the user's interests
-  return MOMS.slice(0,groupSize()).map((m,i)=>{
-    let likes=[...m.likes];
-    const mine=state.likes.length?state.likes:['Natur'];
-    if(!likes.some(l=>mine.includes(l))){likes[0]=mine[i%mine.length]}
-    let acts=[...m.acts];
-    const myActs=state.day.length?state.day:['Gåtur med barnevogn'];
-    const pick=myActs[i%myActs.length];
-    if(!acts.includes(pick))acts=[pick,...acts.slice(0,2)];
-    return {...m,likes,acts};
-  });
-}
-function babyAge(){
-  if(!state.born)return '';
-  const d=(Date.now()-new Date(state.born))/864e5;
-  if(d<0)return '';
-  const w=Math.floor(d/7);
-  if(w<1)return 'helt nyfødt';
-  if(w<13)return w+(w===1?' uge':' uger');
-  const m=Math.floor(d/30.4);return m+(m===1?' måned':' måneder');
-}
-function initial(n){return n.trim().charAt(0).toUpperCase()}
-
-/* ---------- Loading ---------- */
-function startLoading(){
-  const ring=$('#ring');ring.innerHTML='';
-  const ms=moms();
-  ms.forEach((m,i)=>{
-    const a=i/ms.length*Math.PI*2-Math.PI/2;
-    const s=document.createElement('span');s.textContent=initial(m.n);s.style.background=m.c;
-    s.style.left=(110+88*Math.cos(a)-23)+'px';s.style.top=(110+88*Math.sin(a)-23)+'px';
-    ring.appendChild(s);
-  });
-  show('loading');
-  const steps=['Kigger efter babyer på samme alder','Finder mødre tæt på '+state.zip,'Matcher jeres interesser'];
-  let k=0;$('#loadStep').textContent=steps[0];
-  const t=setInterval(()=>{k++;if(k<steps.length)$('#loadStep').textContent=steps[k]},900);
-  setTimeout(()=>{clearInterval(t);renderMatch();show('match')},2900);
-}
-
-/* ---------- Match ---------- */
-const GROUP_NAMES={'Gåtur med barnevogn':'Barnevognsbanden','Kaffe på café':'Kaffeklubben','Legestue':'Legestuevennerne','Hyggesnak derhjemme':'Sofaholdet','Babysvømning':'Plaskeholdet','Babysalmesang':'Sangfuglene','Mor og baby træning':'Træningsholdet','Biblioteket':'Bogormene','Museum':'Kulturmødrene','Picnic i parken':'Picnicklubben','Frokost ude':'Frokostklubben','Online videosnak':'Skærmveninderne'};
-function topActs(){
-  const ms=moms(),cnt=a=>ms.filter(m=>m.acts.includes(a)).length;
-  return [...state.day].map((a,i)=>[a,cnt(a),i]).sort((x,y)=>y[1]-x[1]||x[2]-y[2]).map(x=>x[0]);
-}
-function mainAct(){return topActs()[0]||'Gåtur med barnevogn'}
-function groupName(){return GROUP_NAMES[mainAct()]||'Barnevognsbanden'}
-function renderMatch(){
-  const ms=moms(),baby=state.baby.trim()||'din lille',age=babyAge();
-  $('#mTitle').textContent='Hej til dig og '+baby+' 👋';
-  $('#mSub').textContent=`Vi har fundet ${ms.length} mødre tæt på ${state.zip}, som har børn på samme alder som ${baby} og deler nogle af dine interesser.`;
-  $('#gName').textContent=groupName();
-  $('#gStack').innerHTML=ms.map(m=>`<div class="av" style="background:${m.c}">${initial(m.n)}</div>`).join('');
-  const meet={'Fysisk':'Fysisk','Online':'Online','Begge dele':'Fysisk og online'}[state.meet]||'Fysisk';
-  $('#facts').innerHTML=[
-    ['Børnenes alder',age?'Omkring '+age:'Samme alder'],
-    ['Område',state.zip||'Tæt på dig'],
-    ['Mødes',meet],
-    ['Tidspunkt',state.time||'Formiddag'],
-    ['Sprog',state.lang==='Begge'?'Dansk og engelsk':(state.lang||'Dansk')],
-    ['Første møde',mainAct()]
-  ].map(([s,b])=>`<div class="fact"><small>${s}</small><b>${esc(b)}</b></div>`).join('');
-  const groupLikes=new Set(ms.flatMap(m=>m.likes));
-  const order=[...state.likes.filter(l=>groupLikes.has(l)),...ALL_LIKES.filter(l=>!state.likes.includes(l)&&groupLikes.has(l))];
-  $('#shared').innerHTML=order.map(l=>`<span class="tag ${state.likes.includes(l)?'hit':''}">${state.likes.includes(l)?'✓ ':''}${l}</span>`).join('');
-  const groupActs=new Set(ms.flatMap(m=>m.acts));
-  const aOrder=[...topActs().filter(a=>groupActs.has(a)),...ALL_ACTS.filter(a=>!state.day.includes(a)&&groupActs.has(a))];
-  $('#sharedActs').innerHTML=aOrder.map(a=>`<span class="tag ${state.day.includes(a)?'hit':''}">${state.day.includes(a)?'✓ ':''}${a}</span>`).join('');
-  $('#moms').innerHTML=ms.map(m=>{
-    const shared=m.likes.filter(l=>state.likes.includes(l)).length+m.acts.filter(a=>state.day.includes(a)).length;
-    return `<div class="mom"><div class="av" style="background:${m.c}">${initial(m.n)}</div><div>
-      <h3>${m.n}</h3><div class="sub">Mor til ${m.b}${age?', '+age:''} · ${shared} ting til fælles</div>
-      <div class="tags">${m.acts.filter(a=>state.day.includes(a)).map(a=>`<span class="tag hit">${a}</span>`).join('')}${m.likes.map(l=>`<span class="tag ${state.likes.includes(l)?'hit':''}">${l}</span>`).join('')}</div></div></div>`}).join('');
-  $('.m-scroll').scrollTop=0;
-}
-$('#toChat').onclick=()=>{renderChat();show('chat')};
-
-/* ---------- Chat ---------- */
-let chatReady=false,replied=false;
-function addMsg(m,me,text,anim=true){
-  const el=document.createElement('div');el.className='msg'+(me?' me':'')+(anim?' pop':'');
-  el.innerHTML=me?`<div class="bub">${esc(text)}</div>`:`<div class="av" style="background:${m.c}">${initial(m.n)}</div><div class="bub"><span class="who">${m.n}</span>${esc(text)}</div>`;
-  $('#msgs').appendChild(el);$('#msgs').scrollTop=$('#msgs').scrollHeight;
-}
-function renderChat(){
-  const ms=moms();
-  $('#cName').textContent=groupName();
-  $('#cMembers').textContent=ms.map(m=>m.n).join(', ')+' og dig';
-  $('#cStack').innerHTML=ms.slice(0,3).map(m=>`<div class="av" style="background:${m.c}">${initial(m.n)}</div>`).join('');
-  if(chatReady)return;chatReady=true;
-  $('#msgs').innerHTML=`<div class="day">I dag</div><div class="sys">🎉 Velkommen til ${groupName()}! Sig hej og lær hinanden lidt at kende, før I mødes.</div>`;
-  const when={'Formiddag':'en formiddag i næste uge','Eftermiddag':'en eftermiddag i næste uge','Weekend':'i weekenden'}[state.time]||'en formiddag i næste uge';
-  const PLANS={'Gåtur med barnevogn':`gå en tur med barnevognene ${when}`,'Kaffe på café':`mødes til kaffe på en café ${when}`,'Legestue':`tage i legestue sammen ${when}`,'Hyggesnak derhjemme':`mødes til en hyggesnak hjemme hos en af os ${when}`,'Babysvømning':`tage til babysvømning sammen ${when}`,'Babysalmesang':`prøve babysalmesang sammen ${when}`,'Mor og baby træning':`tage til mor og baby træning ${when}`,'Biblioteket':`mødes på biblioteket ${when}`,'Museum':`tage på museum med barnevognene ${when}`,'Picnic i parken':`holde picnic i parken ${when}`,'Frokost ude':`spise frokost ude sammen ${when}`,'Online videosnak':`tage en hyggelig videosnak ${when}`};
-  const acts=topActs();
-  const plan=PLANS[acts[0]]||PLANS['Gåtur med barnevogn'];
-  const alt=acts[1]?{'Gåtur med barnevogn':'en gåtur','Kaffe på café':'kaffe på café','Legestue':'legestue','Hyggesnak derhjemme':'en hyggesnak derhjemme','Babysvømning':'babysvømning','Babysalmesang':'babysalmesang','Mor og baby træning':'mor og baby træning','Biblioteket':'en tur på biblioteket','Museum':'en tur på museum','Picnic i parken':'picnic i parken','Frokost ude':'frokost ude','Online videosnak':'en videosnak'}[acts[1]]:'';
-  addMsg(ms[0],false,`Hej allesammen! Jeg er Sofie, mor til Ella. Hvor dejligt at vi fandt hinanden 😊`,false);
-  addMsg(ms[1],false,`Hej! Amira her med lille Noah. Skal vi ${plan}?`,false);
-  if(ms[2])addMsg(ms[2],false,alt?`Det lyder perfekt. Og næste gang kunne vi prøve ${alt}? 🙌`:`Det lyder perfekt. Jeg er klar! 🙌`,false);
-  const qr=['Hej allesammen 👋','Det lyder hyggeligt!','Hvilken dag passer jer?'];
-  $('#quick').innerHTML=qr.map(t=>`<button type="button">${t}</button>`).join('');
-  document.querySelectorAll('#quick button').forEach(b=>b.onclick=()=>send(b.textContent));
-}
-function send(text){
-  text=text.trim();if(!text)return;
-  addMsg(null,true,text);$('#chatInput').value='';
-  if(!replied){replied=true;
-    const ms=moms(),baby=state.baby.trim();
-    setTimeout(()=>{
-      const t=document.createElement('div');t.className='msg typing pop';t.innerHTML=`<div class="av" style="background:${ms[0].c}">${initial(ms[0].n)}</div><div class="bub"><i></i><i></i><i></i></div>`;
-      $('#msgs').appendChild(t);$('#msgs').scrollTop=$('#msgs').scrollHeight;
-      setTimeout(()=>{t.remove();addMsg(ms[0],false,baby?`Velkommen til dig og ${baby}! Hvor er det godt, du er med 💛`:`Velkommen! Hvor er det godt, du er med 💛`)},1400);
-    },600);
-  }
-}
-$('#composer').onsubmit=e=>{e.preventDefault();send($('#chatInput').value)};
-$('#cBack').onclick=()=>show('match');
-
-/* ---------- Demo deep links (?demo=question|match|chat) ---------- */
-(function(){
-  const d=new URLSearchParams(location.search).get('demo');
-  if(!d)return;
-  Object.assign(state,{baby:'Alma',born:new Date(Date.now()-10*7*864e5).toISOString().slice(0,10),zip:'2300',meet:'Begge dele',first:'Ja, første gang',day:['Gåtur med barnevogn','Babysalmesang','Picnic i parken'],likes:['Natur','Bøger','Træning','Mad'],lang:'Dansk',size:'Mellem (5 til 6)',time:'Formiddag'});
-  document.querySelectorAll('.screen').forEach(s=>s.style.transition='none');
-  if(d==='question'){qi=5;state.day=['Gåtur med barnevogn','Babysvømning','Picnic i parken'];renderQ();show('quiz')}
-  if(d==='match'){renderMatch();show('match')}
-  if(d==='chat'){renderChat();show('chat')}
-})();
+const f=document.getElementById('wl'),err=document.getElementById('err'),btn=document.getElementById('send');
+document.getElementById('zip').addEventListener('input',e=>e.target.value=e.target.value.replace(/\D/g,''));
+function showErr(t){err.textContent=t;err.style.display='block'}
+f.addEventListener('submit',async e=>{
+  e.preventDefault();err.style.display='none';
+  const d=new FormData(f);
+  const email=(d.get('email')||'').trim(),zip=(d.get('postnummer')||'').trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return showErr('Skriv gerne en gyldig email.');
+  if(!/^\d{4}$/.test(zip))return showErr('Postnummeret skal være 4 cifre.');
+  if(!d.get('status'))return showErr('Vælg om du er gravid eller har fået barn.');
+  if(!d.get('samtykke'))return showErr('Sæt gerne flueben, så vi må gemme dine oplysninger.');
+  if(d.get('botcheck'))return;
+  if(!FORM_ENDPOINT)return showErr('Ventelisten åbner meget snart. Kig forbi igen om lidt 💛');
+  const payload={email,postnummer:zip,status:d.get('status'),samtykke:'ja',kilde:'morinde.com',_subject:'Ny på MorInde ventelisten'};
+  if(WEB3FORMS_ACCESS_KEY){payload.access_key=WEB3FORMS_ACCESS_KEY;payload.subject=payload._subject;payload.botcheck=''}
+  btn.disabled=true;btn.textContent='Sender...';
+  try{
+    const r=await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});
+    if(!r.ok)throw new Error(r.status);
+    f.style.display='none';document.getElementById('thanks').style.display='block';
+  }catch(x){
+    showErr('Ups, det gik ikke igennem. Prøv gerne igen om lidt.');
+  }finally{btn.disabled=false;btn.textContent='Skriv mig på listen'}
+});
 </script>
 </body>
 </html>
