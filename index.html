@@ -118,7 +118,6 @@ p.lead{font-size:17px;line-height:1.5;color:var(--ink-2)}
 .mom .tags{display:flex;flex-wrap:wrap;gap:6px}
 .mom .tag{font-size:12px;padding:5px 10px;border-width:0;background:#F6EFE9}
 .mom .tag.hit{background:var(--mint)}
-.soft-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.75);color:var(--ink-2);border-radius:99px;padding:6px 12px;font-weight:800;font-size:13px;margin-top:10px}
 .note{margin:18px 24px 0;font-size:13px;color:var(--ink-2);text-align:center;line-height:1.4}
 .m-foot{padding:14px 24px 30px;background:linear-gradient(180deg,rgba(255,247,240,0),var(--cream) 30%)}
 
@@ -260,7 +259,7 @@ p.lead{font-size:17px;line-height:1.5;color:var(--ink-2)}
   <div class="q-head">
     <button class="back" id="qBack" aria-label="Tilbage"><svg viewBox="0 0 24 24" fill="none" stroke="#3A3256" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
     <div class="progress"><b id="bar"></b></div>
-    <div class="q-count" id="qCount">1/11</div>
+    <div class="q-count" id="qCount">1/10</div>
   </div>
   <div class="q-body" id="qBody"></div>
   <div class="q-foot"><button class="btn" id="qNext" disabled>Næste</button></div>
@@ -283,7 +282,6 @@ p.lead{font-size:17px;line-height:1.5;color:var(--ink-2)}
       <span class="badge">✨ Vi har fundet en gruppe</span>
       <h1 id="mTitle">Mød dine mødre</h1>
       <p id="mSub"></p>
-      <div id="softTag"></div>
     </div>
     <div class="group-card">
       <div class="gc-top">
@@ -324,7 +322,7 @@ p.lead{font-size:17px;line-height:1.5;color:var(--ink-2)}
 
 <script>
 const $=s=>document.querySelector(s);
-const state={baby:'',born:'',zip:'',meet:'',first:'',priority:'',day:[],likes:[],lang:'',size:'',time:''};
+const state={baby:'',born:'',zip:'',meet:'',first:'',day:[],likes:[],lang:'',size:'',time:''};
 
 /* ---------- Screens ---------- */
 function show(id){
@@ -357,7 +355,6 @@ const Q=[
  {k:'zip',t:'Hvor bor du?',h:'Dit postnummer, så gruppen ligger tæt på dig.',e:'🏡',c:'#D5EFE4',type:'zip',ph:'Fx 2300'},
  {k:'meet',t:'Hvordan vil du helst mødes?',h:'Du kan altid ændre det senere.',e:'🤝',c:'#DCEBFA',opts:[['🌳','Fysisk'],['💻','Online'],['✨','Begge dele']]},
  {k:'first',t:'Er det dit første barn?',h:'Så kan vi finde mødre i samme situation.',e:'💛',c:'#FFF0C2',opts:[['🌱','Ja, første gang'],['🌻','Nej, jeg har prøvet det før']]},
- {k:'priority',t:'Hvad betyder mest for dig i en mødregruppe?',h:'Der er ingen forkerte svar. Vi bruger det bare til at finde dem, du passer bedst med.',e:'💞',c:'#DCEBFA',opts:[['🌱','Nogen, der er i samme livsfase som mig'],['🌈','Nogen, der har de samme interesser'],['🤗','Jeg er åben for alle']]},
  {k:'day',t:'Hvordan ser en god mødregruppedag ud for dig?',h:'Vælg gerne flere.',e:'☕️',c:'#FCDCCB',multi:true,opts:[['🚶‍♀️','Gåtur med barnevogn'],['☕️','Kaffe på café'],['🧸','Legestue'],['🛋️','Hyggesnak derhjemme'],['🏊‍♀️','Babysvømning'],['🎶','Babysalmesang'],['🤸‍♀️','Mor og baby træning'],['📖','Biblioteket'],['🖼️','Museum'],['🧺','Picnic i parken'],['🥗','Frokost ude'],['💻','Online videosnak']]},
  {k:'likes',t:'Hvad kan du godt lide?',h:'Vælg gerne flere.',e:'🌈',c:'#E6DEF8',multi:true,opts:[['🧘‍♀️','Træning'],['🌿','Natur'],['🍝','Mad'],['🎨','Kreativitet'],['📚','Bøger'],['📺','Serier'],['✈️','Rejser'],['💼','Karriere']]},
  {k:'lang',t:'Hvilket sprog vil du tale i gruppen?',h:'',e:'💬',c:'#D5EFE4',opts:[['🇩🇰','Dansk'],['🇬🇧','Engelsk'],['🌍','Begge']]},
@@ -415,26 +412,6 @@ const MOMS=[
 ];
 const ALL_ACTS=['Gåtur med barnevogn','Kaffe på café','Legestue','Hyggesnak derhjemme','Babysvømning','Babysalmesang','Mor og baby træning','Biblioteket','Museum','Picnic i parken','Frokost ude','Online videosnak'];
 const ALL_LIKES=['Træning','Natur','Mad','Kreativitet','Bøger','Serier','Rejser','Karriere'];
-/* ---------- Hvad betyder mest ----------
-   Ingen hård regel. Mødre der vælger samme svar vægtes lidt højere sammen,
-   især 'Nogen, der er i samme livsfase som mig'. */
-const PRI_LIFE='Nogen, der er i samme livsfase som mig',PRI_INT='Nogen, der har de samme interesser',PRI_OPEN='Jeg er åben for alle';
-function priorityBonus(a,b){
-  if(a===b&&a===PRI_LIFE)return 3;
-  if(a===b)return 1;
-  return 0;
-}
-function momPriorities(n){
-  // Opdigtede eksempler: demoen viser en gruppe, hvor de fleste søger det samme som dig
-  const me=state.priority||PRI_OPEN;
-  const other=me===PRI_LIFE?PRI_OPEN:PRI_LIFE;
-  return Array.from({length:n},(_,i)=>i===n-1&&me!==PRI_OPEN?other:me);
-}
-function softTag(ms){
-  if(!state.priority||state.priority===PRI_OPEN)return '';
-  const same=ms.filter(m=>m.priority===state.priority).length;
-  return same>=ms.length/2?'🤝 I søger det samme':'';
-}
 function groupSize(){return state.size==='Lille (3 til 4)'?3:4}
 function moms(){
   // make sure each mom shares at least one of the user's interests
@@ -447,7 +424,7 @@ function moms(){
     const pick=myActs[i%myActs.length];
     if(!acts.includes(pick))acts=[pick,...acts.slice(0,2)];
     return {...m,likes,acts};
-  }).map((m,i,arr)=>({...m,priority:momPriorities(arr.length)[i]}));
+  });
 }
 function babyAge(){
   if(!state.born)return '';
@@ -489,7 +466,6 @@ function renderMatch(){
   const ms=moms(),baby=state.baby.trim()||'din lille',age=babyAge();
   $('#mTitle').textContent='Hej til dig og '+baby+' 👋';
   $('#mSub').textContent=`Vi har fundet ${ms.length} mødre tæt på ${state.zip}, som har børn på samme alder som ${baby} og deler nogle af dine interesser.`;
-  const st=softTag(ms);$('#softTag').innerHTML=st?`<span class="soft-tag">${st}</span>`:'';
   $('#gName').textContent=groupName();
   $('#gStack').innerHTML=ms.map(m=>`<div class="av" style="background:${m.c}">${initial(m.n)}</div>`).join('');
   const meet={'Fysisk':'Fysisk','Online':'Online','Begge dele':'Fysisk og online'}[state.meet]||'Fysisk';
@@ -557,14 +533,13 @@ function send(text){
 $('#composer').onsubmit=e=>{e.preventDefault();send($('#chatInput').value)};
 $('#cBack').onclick=()=>show('match');
 
-/* ---------- Demo deep links (?demo=priority|question|match|chat) ---------- */
+/* ---------- Demo deep links (?demo=question|match|chat) ---------- */
 (function(){
   const d=new URLSearchParams(location.search).get('demo');
   if(!d)return;
-  Object.assign(state,{baby:'Alma',born:new Date(Date.now()-10*7*864e5).toISOString().slice(0,10),zip:'2300',meet:'Begge dele',first:'Ja, første gang',priority:'Nogen, der er i samme livsfase som mig',day:['Gåtur med barnevogn','Babysalmesang','Picnic i parken'],likes:['Natur','Bøger','Træning','Mad'],lang:'Dansk',size:'Mellem (5 til 6)',time:'Formiddag'});
+  Object.assign(state,{baby:'Alma',born:new Date(Date.now()-10*7*864e5).toISOString().slice(0,10),zip:'2300',meet:'Begge dele',first:'Ja, første gang',day:['Gåtur med barnevogn','Babysalmesang','Picnic i parken'],likes:['Natur','Bøger','Træning','Mad'],lang:'Dansk',size:'Mellem (5 til 6)',time:'Formiddag'});
   document.querySelectorAll('.screen').forEach(s=>s.style.transition='none');
-  if(d==='priority'){qi=5;state.priority='';renderQ();show('quiz')}
-  if(d==='question'){qi=6;state.day=['Gåtur med barnevogn','Babysvømning','Picnic i parken'];renderQ();show('quiz')}
+  if(d==='question'){qi=5;state.day=['Gåtur med barnevogn','Babysvømning','Picnic i parken'];renderQ();show('quiz')}
   if(d==='match'){renderMatch();show('match')}
   if(d==='chat'){renderChat();show('chat')}
 })();
