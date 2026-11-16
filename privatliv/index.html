@@ -45,7 +45,7 @@ footer a{color:var(--ink-2)}
     </nav>
   </header>
 
-  <p class="draft">Udkast til Edins godkendelse, 16. november 2026. Siden er ikke udgivet endnu. Punkter markeret med [AFKLARES] skal afgøres, før teksten går live. Fjern også noindex, når siden udgives.</p>
+  <p class="draft">Udkast til Edins godkendelse, 16. november 2026. Siden er ikke udgivet endnu. Fjern noindex, når siden udgives. Sletning af konti, der ikke er brugt i 2 år, med en e-mail først, er skrevet ind her, men er ikke bygget i appen endnu og skal være færdig før udgivelse.</p>
 
   <h1>Privatlivspolitik for MorInde</h1>
   <p class="meta">For appen MorInde og hjemmesiden morinde.com. Dataansvarlig: Edin Deronjic, ED. Sidst opdateret: [DATO FOR UDGIVELSE]</p>
@@ -94,9 +94,9 @@ footer a{color:var(--ink-2)}
   <p>Appen gemmer på selve telefonen, at du er logget ind, hvilke chatbeskeder du har set, og om vi har spurgt dig om beskeder. Det er nødvendigt for, at appen virker.</p>
 
   <h3>Tekniske oplysninger</h3>
-  <p>Når appen taler med vores tjenester, kan din IP-adresse blive set af dem. <span class="afklar">[AFKLARES: hvilke tekniske logs der gemmes hos Supabase, og hvor længe]</span></p>
+  <p>Når appen taler med vores tjenester, kan din IP-adresse blive set af dem. Supabase gemmer tekniske logs (API og database) i 1 dag på det plan, vi bruger nu.</p>
 
-  <p>Retsgrundlag: Vi bruger dit samtykke (databeskyttelsesforordningens artikel 6, stk. 1, litra a). Du giver det, før du går i gang, ved at sætte flueben. <span class="afklar">[AFKLARES: jurist skal afgøre, om det i stedet er aftalen med dig, artikel 6, stk. 1, litra b, der er det rigtige grundlag for dele af behandlingen, for eksempel login og chat]</span></p>
+  <p>Retsgrundlag: Vi bruger dit samtykke (databeskyttelsesforordningens artikel 6, stk. 1, litra a). Du giver det, før du går i gang, ved at sætte flueben. Oplysninger om graviditet og termin behandler vi kun med dit udtrykkelige samtykke (artikel 9, stk. 2, litra a). Det står i afsnit 4.</p>
   <p>Du kan altid trække dit samtykke tilbage. Det, vi har gjort, før du trak det tilbage, bliver ikke ulovligt af den grund.</p>
 
   <h2>3. Hvad de andre i gruppen kan se</h2>
@@ -110,7 +110,7 @@ footer a{color:var(--ink-2)}
     <li>Vi gemmer kun måneden for din termin.</li>
     <li>Vi bruger den kun til at finde andre gravide med termin omkring samme tid. Vi matcher kun gravide med andre gravide, og terminerne må højst ligge en måned fra hinanden.</li>
     <li>Andre i gruppen ser ikke din termin. De ser kun, at I har termin omkring samme tid.</li>
-    <li>Det kan dog vise sig for andre i gruppen, at du er gravid, fordi gruppen kun består af gravide. <span class="afklar">[AFKLARES: jurist skal afgøre, om samtykketeksten skal sige det tydeligere]</span></li>
+    <li>Det kan vise sig for de andre i gruppen, at du er gravid, fordi gruppen kun består af gravide.</li>
     <li>Du kan trække dit ja tilbage under Profil. Så sletter vi din termin med det samme. Du vælger selv, om du vil blive i gruppen eller forlade den.</li>
     <li>Når din baby er født, og du skriver fødselsdatoen, sletter vi terminen, og du bliver i din gruppe.</li>
     <li>Siger du nej tak, er du velkommen tilbage, når din baby er født.</li>
@@ -123,32 +123,31 @@ footer a{color:var(--ink-2)}
   <p>Derefter giver fælles aktiviteter, interesser og tidspunkter point, og vi vælger den gruppe, der passer bedst. Hvis du har sagt, at du er alene med barnet, giver vi et lille plus, når andre i gruppen også er det. Det er aldrig et krav, og du får stadig en gruppe, selv om der ikke er andre alenemødre. Din babys alder og om det er dit første barn bruger vi ikke. Fødselsdatoen står kun i din profil.</p>
   <p>Resultatet er et forslag til en gruppe, og det betyder ikke andet for dig. Du kan altid forlade gruppen og få en ny. Vi bruger ikke matchningen til reklame eller til at vurdere dig som person.</p>
   <p>Har du sagt ja til beskeder, bruger vi de samme regler til at give dig besked, når der er nok mødre i dit område.</p>
-  <p><span class="afklar">[AFKLARES: jurist skal bekræfte, at matchningen ikke er en automatisk afgørelse efter artikel 22, og at beskrivelsen er nok efter artikel 13, stk. 2, litra f]</span></p>
 
   <h2>6. Hvem vi deler oplysninger med</h2>
   <p>Vi sælger ikke dine oplysninger. Vi bruger disse tjenester til at drive MorInde. De behandler oplysninger for os efter vores instruks, som databehandlere, medmindre andet er nævnt.</p>
   <ul>
     <li><b>Supabase</b> (database, login og chat). Din profil, dine svar, din termin, dine beskeder og dit samtykke ligger i en database hos Supabase i Frankfurt i Tyskland. Supabase Pte. Ltd. (Singapore) er kontraktpart. Supabase kan i begrænset omfang behandle oplysninger uden for EU, for eksempel ved support og drift, og bruger underleverandører, blandt andet i USA. Overførslerne sker efter EU's standardkontrakter.</li>
-    <li><b>Resend</b> (sender din login-kode på e-mail). Resend får din e-mail og indholdet af koden. Resend opbevarer data i USA. Overførslen sker efter EU's standardkontrakter, og Resend er med i EU-US Data Privacy Framework. Resend gemmer ifølge egne oplysninger mail og logs i 30 dage på gratis plan. <span class="afklar">[AFKLARES: hvilken plan MorInde bruger hos Resend]</span></li>
-    <li><b>Expo</b> (sender beskeder til din telefon og leverer opdateringer til appen). Expo gemmer dit push-token. Teksten i en besked gemmer Expo ikke længere end nødvendigt for at sende den videre. Når appen henter en opdatering, får Expo din IP-adresse, dit styresystem og et tilfældigt installations-id. Expo ligger i USA, og overførslen sker efter EU's standardkontrakter. Expo oplyser, at de følger EU-US Data Privacy Framework.</li>
+    <li><b>Resend</b> (sender din login-kode på e-mail). Resend får din e-mail og indholdet af koden. Resend opbevarer data i USA. Overførslen sker efter EU's standardkontrakter, og Resend er med i EU-US Data Privacy Framework. Resend gemmer ifølge egne oplysninger mail og logs i 30 dage.</li>
+    <li><b>Expo</b> (sender beskeder til din telefon og leverer opdateringer til appen). Expo gemmer dit push-token. Teksten i en besked gemmer Expo ikke længere end nødvendigt for at sende den videre. Når appen henter en opdatering, får Expo din IP-adresse, dit styresystem og et tilfældigt installations-id. Expo oplyser, at de sletter de rå opdateringslogs efter 3 dage. Expo ligger i USA, og overførslen sker efter EU's standardkontrakter. Expo oplyser, at de følger EU-US Data Privacy Framework.</li>
     <li><b>Apple og Google</b> (leverer beskederne til din telefon). Expo sender beskederne videre via Apples og Googles beskedtjenester. Beskederne indeholder aldrig navne eller indhold fra chatten. De siger kun, at der er sket noget.</li>
-    <li><b>App Store og Google Play.</b> Når du henter appen, behandler Apple eller Google dine oplysninger som selvstændigt ansvarlige efter deres egne regler. Det har vi ikke indflydelse på. <span class="afklar">[AFKLARES: bekræft formuleringen]</span></li>
+    <li><b>App Store og Google Play.</b> Når du henter appen, behandler Apple eller Google dine oplysninger som selvstændigt ansvarlige efter deres egne regler. Det har vi ikke indflydelse på.</li>
     <li><b>Tally BV</b> (Belgien) driver ventelisteformularen på morinde.com og gemmer tilmeldingerne for os som databehandler. Tally oplyser, at formulardata krypteres og opbevares i Europa. Vi har en databehandleraftale med Tally.</li>
     <li><b>GitHub, Inc.</b> (USA) hoster hjemmesiden morinde.com. GitHub oplyser, at besøgendes IP-adresse logges af sikkerhedshensyn, når man besøger en side på GitHub Pages. Se <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHubs privatlivserklæring</a>.</li>
-    <li><b>Porkbun</b> videresender e-mail til kontakt@morinde.com. <span class="afklar">[AFKLARES: bekræft, at det skal stå i politikken, og hvordan videresendelsen er sat op]</span></li>
+    <li><b>Porkbun</b> videresender e-mail sendt til kontakt@morinde.com.</li>
   </ul>
-  <p>Vi giver ikke dine oplysninger til kommuner, sundhedsplejen eller andre. <span class="afklar">[AFKLARES: Edin skal bekræfte. Hvis kommuner senere får adgang til tal eller andet, skal det stå her først]</span></p>
+  <p>Vi giver aldrig oplysninger om den enkelte mor til kommuner eller til sundhedsplejen.</p>
 
   <h2>7. Hvor længe vi gemmer dine oplysninger</h2>
   <ul>
     <li>Vi gemmer dine oplysninger, så længe du har en konto.</li>
     <li>Når du sletter din konto i appen, sletter vi din profil, dine svar, din termin, din e-mail, dine beskeder i gruppechatten, dit push-token, dine blokeringer, dit samtykke og listen over forladte grupper. Det kan ikke fortrydes. Du kan også bede om sletning ved at skrive til <a href="mailto:kontakt@morinde.com">kontakt@morinde.com</a>, også uden appen. Sådan gør du, står på <a href="/slet-konto/">morinde.com/slet-konto</a>.</li>
     <li>Forlader du en gruppe, men sletter ikke din konto, bliver dine tidligere beskeder i gruppens chat liggende, så længe du har kontoen. De andre ser, at du ikke længere er med.</li>
-    <li>Rapporter, du har sendt, og rapporter om dig, bliver liggende uden dit navn på, så vi stadig kan følge op, hvis der er sket noget alvorligt. <span class="afklar">[AFKLARES: hvor længe rapporter må gemmes. Edin skal også bekræfte, at rapporter beholdes uden navn efter sletning]</span></li>
-    <li>Din login-kode til e-mail ligger hos Resend i op til 30 dage. <span class="afklar">[AFKLARES: bekræft plan, se afsnit 6]</span></li>
-    <li>Sikkerhedskopier: <span class="afklar">[AFKLARES: Supabase tager ifølge deres dokumentation ikke automatiske sikkerhedskopier på det gratis plan. Skal vi selv tage kopier, og hvor længe ligger de så? Hvis vi opgraderer, gemmer Supabase dagskopier i 7 dage]</span></li>
-    <li>Konti, der ikke bliver brugt: <span class="afklar">[AFKLARES: skal inaktive konti slettes efter en bestemt tid? Appen gør det ikke i dag]</span></li>
-    <li>Samtykkelog (tidspunkt og tekstversion) slettes med din konto. <span class="afklar">[AFKLARES: må vi gemme beviset på samtykke efter sletning? Jurist skal afgøre]</span></li>
+    <li>Rapporter, du har sendt, og rapporter om dig, gemmer vi i 6 måneder. Hvis du sletter din konto, bliver de liggende uden dit navn på i den periode, så vi stadig kan følge op, hvis der er sket noget alvorligt. Derefter sletter vi dem.</li>
+    <li>Din login-kode til e-mail ligger hos Resend i op til 30 dage, ifølge Resends egne oplysninger.</li>
+    <li>Sikkerhedskopier: På det plan, vi bruger nu, tager Supabase ikke automatiske sikkerhedskopier, og vi tager ikke egne kopier.</li>
+    <li>Konti, der ikke bliver brugt: Hvis du ikke har brugt din konto i 2 år, sletter vi den. Før vi gør det, sender vi dig en e-mail, så du kan nå at logge ind, hvis du vil beholde den. <span class="afklar">[FØR UDGIVELSE: er ikke bygget i appen endnu]</span></li>
+    <li>Samtykkelog (tidspunkt og tekstversion) slettes med din konto.</li>
   </ul>
 
   <h2>8. Sådan passer vi på dine oplysninger</h2>
@@ -158,7 +157,7 @@ footer a{color:var(--ink-2)}
     <li>Din termin kan ingen andre mødre læse.</li>
     <li>Vi bruger ingen adgangskoder, kun engangskoder på e-mail.</li>
     <li>Supabase oplyser, at databaser og sikkerhedskopier er krypteret, når de ligger på disk.</li>
-    <li>Der er ingen reklamer og ingen sporing til reklame i appen. <span class="afklar">[AFKLARES: Expo tæller installationer med et tilfældigt id og IP, når appen henter opdateringer. Det er ikke reklamesporing, men formuleringen skal passe]</span></li>
+    <li>Der er ingen reklamer og ingen sporing til reklame i appen.</li>
   </ul>
   <p>Sker der et brud på sikkerheden, der er til risiko for dig, giver vi dig og Datatilsynet besked, som loven kræver.</p>
 
@@ -186,7 +185,7 @@ footer a{color:var(--ink-2)}
   <p>Vi bruger oplysningerne til at give dig besked, når MorInde åbner, til at se, hvor i landet der er interesse, og til at lade beskeden passe til, om du venter eller har født. Vi sender ikke reklamer fra andre, og vi sælger ikke dine oplysninger.</p>
   <p>Retsgrundlag er dit samtykke (artikel 6, stk. 1, litra a). At du er gravid, kan være en helbredsoplysning. Den behandler vi kun, hvis du har givet dit udtrykkelige samtykke i et separat felt i formularen, som ikke er sat på forhånd (artikel 9, stk. 2, litra a).</p>
   <p>Oplysningerne gemmes hos Tally BV i Belgien i højst 6 måneder efter din tilmelding. Vi sletter dem manuelt senest da, tidligere når MorInde åbner og du har fået besked, eller hvis du beder om det. Hvis MorInde ikke åbner, sletter vi hele ventelisten.</p>
-  <p>Hjemmesiden hostes hos GitHub. Vi bruger ikke cookies til statistik eller markedsføring, og skrifttyperne ligger på vores egen side. Formularen hentes først fra Tally, når du trykker på “Åbn tilmeldingen”. Tally oplyser, at de ikke bruger cookie tracking. Tally kan gemme et tilfældigt ID i din browser for at kunne genkende en besvarelse. <span class="afklar">[AFKLARES: om Tallys ID i browseren kræver samtykke efter cookiereglerne]</span></p>
+  <p>Hjemmesiden hostes hos GitHub. Vi bruger ikke cookies til statistik eller markedsføring, og skrifttyperne ligger på vores egen side. Formularen hentes først fra Tally, når du trykker på “Åbn tilmeldingen”. Tally oplyser, at de ikke bruger cookie tracking. Tally kan gemme et tilfældigt ID i din browser for at kunne genkende en besvarelse.</p>
   <p>Du kan trække dit samtykke tilbage og bede om sletning ved at skrive til <a href="mailto:kontakt@morinde.com">kontakt@morinde.com</a>.</p>
 
   <h2>13. Klage</h2>
