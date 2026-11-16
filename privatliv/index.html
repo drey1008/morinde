@@ -6,105 +6,208 @@
 <meta name="theme-color" content="#FFF7F0">
 <meta name="robots" content="noindex">
 <title>Privatlivspolitik · MorInde</title>
+<meta name="description" content="Privatlivspolitik for appen MorInde og hjemmesiden morinde.com. Dataansvarlig er Edin Deronjic, ED.">
 <link href="/fonts/fonts.css" rel="stylesheet">
 <style>
-:root{--cream:#FFF7F0;--coral:#E8806F;--ink:#3A3256;--ink-2:#6E6789;--butter:#FFF0C2}
+:root{--cream:#FFF7F0;--coral:#E8806F;--ink:#3A3256;--ink-2:#6E6789;--butter:#FFF0C2;--line:#EFE4DA}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
 .wrap{max-width:640px;margin:0 auto;padding:0 24px 40px}
 header{padding:20px 0 10px}
 .logo{display:inline-flex;align-items:center;gap:8px;font:700 20px 'Fraunces',serif;text-decoration:none;color:inherit}
 .logo i{width:28px;height:28px;border-radius:50%;background:var(--coral);display:inline-grid;place-items:center;color:#fff;font-style:normal;font-size:14px}
-h1,h2{font-family:'Fraunces',Georgia,serif;font-weight:700;line-height:1.2}
+.nav{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0 4px;font-size:14px}
+.nav a{color:var(--ink-2)}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:700;line-height:1.2}
 h1{font-size:34px;margin:18px 0 6px}
 h2{font-size:21px;margin:26px 0 8px}
+h3{font-size:17px;margin:18px 0 6px}
+.meta{color:var(--ink-2);font-size:14px;margin-bottom:16px}
 p,li{color:var(--ink-2);font-size:16px}
-ul{padding-left:20px}
+p{margin-bottom:10px}
+ul,ol{padding-left:20px;margin:8px 0 16px}
 .draft{background:var(--butter);border-radius:18px;padding:14px 16px;font-weight:700;margin:14px 0}
+.afklar{background:var(--butter);border-radius:8px;padding:0 6px;font-weight:700;color:var(--ink);font-size:14px}
 a{color:var(--ink)}
 footer{text-align:center;font-size:14px;color:var(--ink-2);padding-top:30px}
+footer .links{margin-bottom:10px;display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+footer a{color:var(--ink-2)}
 </style>
 </head>
 <body>
-<!--
-  UDKAST: Denne privatlivspolitik er IKKE juridisk gennemgået.
-  Valg truffet af Edin 1. november 2026:
-   Dataansvarlig: Edin Deronjic (privatperson). Ingen CVR.
-   Kontakt: kontakt@morinde.com (videresendes via Porkbun Email Forwarding, skal sættes op).
-   Opbevaring: højst 6 måneder, slettes manuelt.
-   Graviditet: beholdes med udtrykkeligt samtykke (art. 9, stk. 2, litra a), separat afkrydsningsfelt i Tally.
-  BØR TJEKKES:
-   * Om GitHub (USA) er certificeret under EU-US Data Privacy Framework.
-   * Om Tallys respondent ID i local storage kræver samtykke efter cookiereglerne.
-  Kilder: se /workspace/morinde-site-guides/gdpr-tjekliste.md
--->
 <div class="wrap">
-  <header><a class="logo" href="/"><i>♡</i>MorInde</a></header>
-  <h1>Privatlivspolitik</h1>
-  <p>For ventelisten på morinde.com</p>
+  <header>
+    <a class="logo" href="/"><i>♡</i>MorInde</a>
+    <nav class="nav" aria-label="Sider">
+      <a href="/support/">Support</a>
+      <a href="/slet-konto/">Slet konto</a>
+      <a href="mailto:kontakt@morinde.com">Kontakt</a>
+    </nav>
+  </header>
 
-  <h2>Hvem er dataansvarlig?</h2>
-  <p>MorInde er et projekt fra ED. (<a href="https://edwebworks.com" target="_blank" rel="noopener">edwebworks.com</a>).</p>
-  <p>Dataansvarlig: <b>Edin Deronjic (privatperson)</b><br>Kontakt: <b><a href="mailto:kontakt@morinde.com">kontakt@morinde.com</a></b></p>
+  <p class="draft">Udkast til Edins godkendelse, 16. november 2026. Siden er ikke udgivet endnu. Punkter markeret med [AFKLARES] skal afgøres, før teksten går live. Fjern også noindex, når siden udgives.</p>
 
-  <h2>Hvilke oplysninger gemmer vi?</h2>
-  <p>Når du skriver dig på ventelisten, gemmer vi:</p>
+  <h1>Privatlivspolitik for MorInde</h1>
+  <p class="meta">For appen MorInde og hjemmesiden morinde.com. Dataansvarlig: Edin Deronjic, ED. Sidst opdateret: [DATO FOR UDGIVELSE]</p>
+
+  <h2>Kort fortalt</h2>
   <ul>
-    <li>Din email</li>
-    <li>Dit postnummer</li>
-    <li>Om du er gravid eller har fået barn</li>
-    <li>At du har givet samtykke, og hvornår du skrev dig op</li>
+    <li>Vi bruger dine svar til at finde en mødregruppe, der passer til dig.</li>
+    <li>Din e-mail og din termin ser ingen andre end os.</li>
+    <li>Din profil, dine svar og dine beskeder ligger på servere i EU. Til e-mail og beskeder på telefonen bruger vi tjenester i USA, som kun får det, de skal bruge til opgaven.</li>
+    <li>Vi sælger aldrig dine oplysninger, og der er ingen reklamer i appen.</li>
+    <li>Du kan rette dine svar, trække dit samtykke tilbage og slette din konto, når du vil, inde i appen. Du kan også bede om sletning på e-mail, også uden appen.</li>
+    <li>Du kan altid skrive til os på <a href="mailto:kontakt@morinde.com">kontakt@morinde.com</a>.</li>
   </ul>
-  <p>Vi beder ikke om dit navn, dit barns navn eller andre oplysninger på ventelisten. Du har ingen pligt til at skrive dig op. Hvis du ikke gør det, kan vi bare ikke give dig besked.</p>
 
-  <h2>Hvorfor gemmer vi dem?</h2>
+  <h2>1. Hvem passer på dine oplysninger</h2>
+  <p>Dataansvarlig er Edin Deronjic, der driver appen MorInde som et projekt under ED. (<a href="https://edwebworks.com" target="_blank" rel="noopener">edwebworks.com</a>). Der er ikke noget CVR-nummer.</p>
+  <p>Adresse: <span class="afklar">[AFKLARES: postadresse, som må stå offentligt]</span><br>
+  E-mail: <a href="mailto:kontakt@morinde.com">kontakt@morinde.com</a></p>
+
+  <h2>2. Hvad vi gemmer, hvorfor, og hvad vi bygger det på</h2>
+
+  <h3>Login</h3>
+  <p>Din e-mail. Du logger ind med en kode på seks cifre, som vi sender til din e-mail fra no-reply@morinde.com. Vi bruger ikke adgangskoder. Formål: at du kan komme ind i din konto, og at vi kan sende dig koden.</p>
+
+  <h3>Din profil</h3>
+  <p>Dit fornavn, din babys navn (hvis du vil skrive det), dit postnummer, om du helst vil mødes fysisk, online eller begge dele, om det er dit første barn, om du har en partner eller er alene med barnet (valgfrit), hvilke aktiviteter og interesser du vælger, hvilket sprog du vil tale, hvor stor gruppen skal være, og hvornår du helst vil mødes (formiddag, eftermiddag, weekend).</p>
+  <p>Er din baby født, gemmer vi også fødselsdatoen. Den bruges ikke til at finde din gruppe. Den står kun i din profil, så du kan se den og rette den.</p>
+  <p>Svaret om partner eller alenemor bruges kun til at finde din gruppe, og kun som et ønske: er du alene med barnet, prøver vi at finde andre i samme situation, når vi kan. De andre i gruppen kan ikke se det svar.</p>
+  <p>Formål med de øvrige oplysninger: at finde en gruppe, der passer til dig, og at vise gruppen, hvad I har til fælles.</p>
+
+  <h3>Din termin, hvis du er gravid</h3>
+  <p>Kun måned og år. Se afsnit 4.</p>
+
+  <h3>Din gruppe og dine beskeder</h3>
+  <p>Hvilken gruppe du er med i, og hvilke grupper du har forladt (så du ikke får den samme igen). Beskeder, du skriver i gruppechatten. Formål: at gruppen kan snakke sammen.</p>
+
+  <h3>Blokering og rapporter</h3>
+  <p>Hvem du har blokeret. Hvis du rapporterer en mor eller en besked: hvem det handler om, hvilken grund du valgte, hvad du selv skrev, og en kopi af beskeden hvis du rapporterer en chatbesked. Formål: at du kan beskytte dig selv, og at vi kan reagere, hvis nogen opfører sig forkert.</p>
+
+  <h3>Dit samtykke og din alder</h3>
+  <p>Hvornår du sagde ja, hvilken version af teksten du sagde ja til, og at du har bekræftet, at du er fyldt 18 år. Formål: at kunne vise, at du har givet samtykke, og at du må bruge appen.</p>
+
+  <h3>Beskeder på telefonen</h3>
+  <p>Hvis du siger ja til beskeder, gemmer vi et push-token fra din telefon og om det er en iPhone eller Android. Vi gemmer også, om du vil have besked, når der er nok mødre i dit område. Formål: at give dig besked, når du har fået en gruppe, når der er en ny besked, og når der er nok mødre i dit område.</p>
+
+  <h3>På din telefon</h3>
+  <p>Appen gemmer på selve telefonen, at du er logget ind, hvilke chatbeskeder du har set, og om vi har spurgt dig om beskeder. Det er nødvendigt for, at appen virker.</p>
+
+  <h3>Tekniske oplysninger</h3>
+  <p>Når appen taler med vores tjenester, kan din IP-adresse blive set af dem. <span class="afklar">[AFKLARES: hvilke tekniske logs der gemmes hos Supabase, og hvor længe]</span></p>
+
+  <p>Retsgrundlag: Vi bruger dit samtykke (databeskyttelsesforordningens artikel 6, stk. 1, litra a). Du giver det, før du går i gang, ved at sætte flueben. <span class="afklar">[AFKLARES: jurist skal afgøre, om det i stedet er aftalen med dig, artikel 6, stk. 1, litra b, der er det rigtige grundlag for dele af behandlingen, for eksempel login og chat]</span></p>
+  <p>Du kan altid trække dit samtykke tilbage. Det, vi har gjort, før du trak det tilbage, bliver ikke ulovligt af den grund.</p>
+
+  <h2>3. Hvad de andre i gruppen kan se</h2>
+  <p>Andre i din gruppe ser dit fornavn, din babys navn hvis du har skrevet det, om du venter eller har født, og de aktiviteter og interesser, I har til fælles. De ved, at I bor i nærheden af hinanden, men ser aldrig din adresse, dit postnummer eller din e-mail. De ser heller aldrig din termin, og de ser ikke, om du har en partner eller er alene med barnet.</p>
+  <p>Du kan blokere en mor. Så ser I ikke hinandens beskeder. Du kan rapportere en mor eller en besked. Det kan gruppen ikke se.</p>
+  <p>Beskeder i chatten kan alle i gruppen læse. Skriv derfor ikke noget, du ikke vil dele med dem.</p>
+
+  <h2>4. Graviditet og dit ekstra ja</h2>
+  <p>At du er gravid, er en oplysning om dit helbred. Det er en særlig kategori af oplysninger. Derfor spørger vi om dit særskilte, udtrykkelige samtykke, før du skriver din termin (artikel 9, stk. 2, litra a). Du skal sætte et flueben, og det er ikke sat på forhånd.</p>
   <ul>
-    <li>For at give dig besked på email, når MorInde åbner.</li>
-    <li>For at se, hvor i landet der er interesse, så vi kan starte grupper de rigtige steder.</li>
-    <li>For at vide, om du venter barn eller allerede har fået det, så beskeden passer til dig.</li>
+    <li>Vi gemmer kun måneden for din termin.</li>
+    <li>Vi bruger den kun til at finde andre gravide med termin omkring samme tid. Gravide matches kun med andre gravide, og terminerne må højst ligge en måned fra hinanden.</li>
+    <li>Andre i gruppen ser ikke din termin. De ser kun, at I har termin omkring samme tid.</li>
+    <li>Det kan dog vise sig for andre i gruppen, at du er gravid, fordi gruppen kun består af gravide. <span class="afklar">[AFKLARES: jurist skal afgøre, om samtykketeksten skal sige det tydeligere]</span></li>
+    <li>Du kan trække dit ja tilbage under Profil. Så sletter vi din termin med det samme. Du vælger selv, om du vil blive i gruppen eller forlade den.</li>
+    <li>Når din baby er født, og du skriver fødselsdatoen, sletter vi terminen, og du bliver i din gruppe.</li>
+    <li>Siger du nej tak, er du velkommen tilbage, når din baby er født.</li>
+    <li>Appen sender ingen beskeder, der tæller ned til termin.</li>
   </ul>
-  <p>Vi sender ikke reklamer fra andre, vi sælger ikke dine oplysninger, og vi bruger dem ikke til automatiske afgørelser eller profilering.</p>
 
-  <h2>Retsgrundlag</h2>
-  <p>Vi behandler din email og dit postnummer på grundlag af dit samtykke, som du giver, når du sætter flueben i formularen (databeskyttelsesforordningens artikel 6, stk. 1, litra a).</p>
-  <p>Du kan altid trække dit samtykke tilbage ved at skrive til <a href="mailto:kontakt@morinde.com">kontakt@morinde.com</a>. Så sletter vi dine oplysninger. Det påvirker ikke det, vi lovligt har gjort, før du trak samtykket tilbage.</p>
+  <h2>5. Sådan finder vi din gruppe</h2>
+  <p>Vi finder din gruppe automatisk med faste regler. Der sidder ikke et menneske og vælger.</p>
+  <p>Først skal det passe i praksis. I skal vælge samme mødeform og samme sprog, bo højst cirka 35 kilometer fra hinanden (eller mødes online) og ønske samme gruppestørrelse. Er du gravid, matcher vi dig kun med andre gravide, hvis termin ligger inden for en måned fra din.</p>
+  <p>Derefter giver fælles aktiviteter, interesser og tidspunkter point, og vi vælger den gruppe, der passer bedst. Hvis du har sagt, at du er alene med barnet, giver vi et lille plus, når andre i gruppen også er det. Det er aldrig et krav, og du får stadig en gruppe, selv om der ikke er andre alenemødre. Din babys alder og om det er dit første barn bruger vi ikke. Fødselsdatoen står kun i din profil.</p>
+  <p>Resultatet er et forslag til en gruppe, og det betyder ikke andet for dig. Du kan altid forlade gruppen og få en ny. Vi bruger ikke matchningen til reklame eller til at vurdere dig som person.</p>
+  <p>Har du sagt ja til beskeder, bruger vi de samme regler til at give dig besked, når der er nok mødre i dit område.</p>
+  <p><span class="afklar">[AFKLARES: jurist skal bekræfte, at matchningen ikke er en automatisk afgørelse efter artikel 22, og at beskrivelsen er nok efter artikel 13, stk. 2, litra f]</span></p>
 
-  <h2>Oplysningen om graviditet</h2>
-  <p>At du er gravid eller har født, kan være en helbredsoplysning. Det er en særlig kategori af personoplysninger, som vi passer ekstra godt på.</p>
-  <p>Vi behandler kun den oplysning, hvis du har givet dit udtrykkelige samtykke til det i et separat afkrydsningsfelt i formularen (databeskyttelsesforordningens artikel 9, stk. 2, litra a). Feltet er ikke afkrydset på forhånd.</p>
-  <p>Vi bruger kun oplysningen til at kunne matche dig og give dig en besked, der passer til dig. Du kan trække samtykket tilbage når som helst ved at skrive til <a href="mailto:kontakt@morinde.com">kontakt@morinde.com</a>. Så sletter vi oplysningen.</p>
-
-  <h2>Hvem behandler oplysningerne for os?</h2>
+  <h2>6. Hvem vi deler oplysninger med</h2>
+  <p>Vi sælger ikke dine oplysninger. Vi bruger disse tjenester til at drive MorInde. De behandler oplysninger for os efter vores instruks, som databehandlere, medmindre andet er nævnt.</p>
   <ul>
-    <li><b>Tally BV</b> (Belgien) driver formularen og gemmer tilmeldingerne for os som databehandler. Tally oplyser, at formulardata krypteres og opbevares i Europa. Vi har en databehandleraftale med Tally.</li>
-    <li><b>GitHub, Inc.</b> (USA) hoster hjemmesiden. GitHub oplyser, at besøgendes IP adresse logges af sikkerhedshensyn, når man besøger en side på GitHub Pages. Se <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHubs privatlivserklæring</a>.</li>
+    <li><b>Supabase</b> (database, login og chat). Din profil, dine svar, din termin, dine beskeder og dit samtykke ligger i en database hos Supabase i Frankfurt i Tyskland. Supabase Pte. Ltd. (Singapore) er kontraktpart. Supabase kan i begrænset omfang behandle oplysninger uden for EU, for eksempel ved support og drift, og bruger underleverandører, blandt andet i USA. Overførslerne sker efter EU's standardkontrakter.</li>
+    <li><b>Resend</b> (sender din login-kode på e-mail). Resend får din e-mail og indholdet af koden. Resend opbevarer data i USA. Overførslen sker efter EU's standardkontrakter, og Resend er med i EU-US Data Privacy Framework. Resend gemmer ifølge egne oplysninger mail og logs i 30 dage på gratis plan. <span class="afklar">[AFKLARES: hvilken plan MorInde bruger hos Resend]</span></li>
+    <li><b>Expo</b> (sender beskeder til din telefon og leverer opdateringer til appen). Expo gemmer dit push-token. Teksten i en besked gemmer Expo ikke længere end nødvendigt for at sende den videre. Når appen henter en opdatering, får Expo din IP-adresse, dit styresystem og et tilfældigt installations-id. Expo ligger i USA, og overførslen sker efter EU's standardkontrakter. Expo oplyser, at de følger EU-US Data Privacy Framework.</li>
+    <li><b>Apple og Google</b> (leverer beskederne til din telefon). Expo sender beskederne videre via Apples og Googles beskedtjenester. Beskederne indeholder aldrig navne eller indhold fra chatten. De siger kun, at der er sket noget.</li>
+    <li><b>App Store og Google Play.</b> Når du henter appen, behandler Apple eller Google dine oplysninger som selvstændigt ansvarlige efter deres egne regler. Det har vi ikke indflydelse på. <span class="afklar">[AFKLARES: bekræft formuleringen]</span></li>
+    <li><b>Tally BV</b> (Belgien) driver ventelisteformularen på morinde.com og gemmer tilmeldingerne for os som databehandler. Tally oplyser, at formulardata krypteres og opbevares i Europa. Vi har en databehandleraftale med Tally.</li>
+    <li><b>GitHub, Inc.</b> (USA) hoster hjemmesiden morinde.com. GitHub oplyser, at besøgendes IP-adresse logges af sikkerhedshensyn, når man besøger en side på GitHub Pages. Se <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHubs privatlivserklæring</a>.</li>
+    <li><b>Porkbun</b> videresender e-mail til kontakt@morinde.com. <span class="afklar">[AFKLARES: bekræft, at det skal stå i politikken, og hvordan videresendelsen er sat op]</span></li>
   </ul>
-  <p>Vi giver ikke dine oplysninger videre til andre.</p>
+  <p>Vi giver ikke dine oplysninger til kommuner, sundhedsplejen eller andre. <span class="afklar">[AFKLARES: Edin skal bekræfte. Hvis kommuner senere får adgang til tal eller andet, skal det stå her først]</span></p>
 
-  <h2>Hvor længe gemmer vi dem?</h2>
-  <p>Vi gemmer dine oplysninger i højst <b>6 måneder</b> efter din tilmelding. Vi sletter dem manuelt senest da. Vi sletter dem tidligere, når MorInde åbner og du har fået besked, eller hvis du beder om det. Hvis MorInde ikke åbner, sletter vi hele ventelisten.</p>
-
-  <h2>Cookies</h2>
-  <p>Vi bruger ikke cookies til statistik eller markedsføring, og skrifttyperne ligger på vores egen side. Formularen hentes først fra Tally, når du trykker på “Åbn tilmeldingen”. Tally oplyser, at de ikke bruger cookie tracking. Tally kan gemme et tilfældigt ID i din browser for at kunne genkende en besvarelse.</p>
-
-  <h2>Dine rettigheder</h2>
+  <h2>7. Hvor længe vi gemmer dine oplysninger</h2>
   <ul>
-    <li>Ret til indsigt i de oplysninger, vi har om dig</li>
-    <li>Ret til at få forkerte oplysninger rettet</li>
-    <li>Ret til at blive slettet</li>
-    <li>Ret til begrænsning af behandlingen</li>
-    <li>Ret til indsigelse</li>
-    <li>Ret til at få dine oplysninger udleveret (dataportabilitet)</li>
-    <li>Ret til at trække dit samtykke tilbage når som helst</li>
+    <li>Vi gemmer dine oplysninger, så længe du har en konto.</li>
+    <li>Når du sletter din konto i appen, sletter vi din profil, dine svar, din termin, din e-mail, dine beskeder i gruppechatten, dit push-token, dine blokeringer, dit samtykke og listen over forladte grupper. Det kan ikke fortrydes. Du kan også bede om sletning ved at skrive til <a href="mailto:kontakt@morinde.com">kontakt@morinde.com</a>, også uden appen. Sådan gør du, står på <a href="/slet-konto/">morinde.com/slet-konto</a>.</li>
+    <li>Forlader du en gruppe, men sletter ikke din konto, bliver dine tidligere beskeder i gruppens chat liggende, så længe du har kontoen. De andre ser, at du ikke længere er med.</li>
+    <li>Rapporter, du har sendt, og rapporter om dig, bliver liggende uden dit navn på, så vi stadig kan følge op, hvis der er sket noget alvorligt. <span class="afklar">[AFKLARES: hvor længe rapporter må gemmes. Edin skal også bekræfte, at rapporter beholdes uden navn efter sletning]</span></li>
+    <li>Din login-kode til e-mail ligger hos Resend i op til 30 dage. <span class="afklar">[AFKLARES: bekræft plan, se afsnit 6]</span></li>
+    <li>Sikkerhedskopier: <span class="afklar">[AFKLARES: Supabase tager ifølge deres dokumentation ikke automatiske sikkerhedskopier på det gratis plan. Skal vi selv tage kopier, og hvor længe ligger de så? Hvis vi opgraderer, gemmer Supabase dagskopier i 7 dage]</span></li>
+    <li>Konti, der ikke bliver brugt: <span class="afklar">[AFKLARES: skal inaktive konti slettes efter en bestemt tid? Appen gør det ikke i dag]</span></li>
+    <li>Samtykkelog (tidspunkt og tekstversion) slettes med din konto. <span class="afklar">[AFKLARES: må vi gemme beviset på samtykke efter sletning? Jurist skal afgøre]</span></li>
   </ul>
-  <p>Skriv til <b><a href="mailto:kontakt@morinde.com">kontakt@morinde.com</a></b>, så svarer vi hurtigst muligt.</p>
 
-  <h2>Klage</h2>
-  <p>Du kan klage til Datatilsynet, hvis du er utilfreds med, hvordan vi behandler dine oplysninger: <a href="https://www.datatilsynet.dk" target="_blank" rel="noopener">datatilsynet.dk</a>.</p>
+  <h2>8. Sådan passer vi på dine oplysninger</h2>
+  <ul>
+    <li>Alt sendes krypteret mellem appen og vores database.</li>
+    <li>Hver mor kan kun læse sin egen profil. Det du deler med gruppen, hentes gennem en bestemt funktion, der kun giver det, gruppen må se.</li>
+    <li>Din termin kan ingen andre mødre læse.</li>
+    <li>Vi bruger ingen adgangskoder, kun engangskoder på e-mail.</li>
+    <li>Supabase oplyser, at databaser og sikkerhedskopier er krypteret, når de ligger på disk.</li>
+    <li>Der er ingen reklamer og ingen sporing til reklame i appen. <span class="afklar">[AFKLARES: Expo tæller installationer med et tilfældigt id og IP, når appen henter opdateringer. Det er ikke reklamesporing, men formuleringen skal passe]</span></li>
+  </ul>
+  <p>Sker der et brud på sikkerheden, der er til risiko for dig, giver vi dig og Datatilsynet besked, som loven kræver.</p>
 
-  <p style="margin-top:22px;font-size:14px">Senest opdateret: 1. november 2026</p>
+  <h2>9. Dine rettigheder</h2>
+  <p>Du har ret til:</p>
+  <ul>
+    <li>at se, hvilke oplysninger vi har om dig (indsigt),</li>
+    <li>at få forkerte oplysninger rettet,</li>
+    <li>at få dine oplysninger slettet,</li>
+    <li>at få behandlingen begrænset,</li>
+    <li>at gøre indsigelse mod behandlingen,</li>
+    <li>at få dine oplysninger udleveret i et almindeligt format (dataportabilitet),</li>
+    <li>at trække dit samtykke tilbage, når du vil.</li>
+  </ul>
+  <p>Inde i appen kan du selv rette dine svar, trække dit samtykke til termin tilbage, slå beskeder fra og slette din konto. Til resten skriver du til <a href="mailto:kontakt@morinde.com">kontakt@morinde.com</a>. Vi svarer hurtigst muligt og senest inden for en måned.</p>
 
-  <footer><a href="/">Til forsiden</a> · Lavet med 💛 af <a href="https://edwebworks.com" target="_blank" rel="noopener">ED.</a></footer>
+  <h2>10. Skal du give os oplysningerne?</h2>
+  <p>Du bestemmer selv. Men uden e-mail kan du ikke logge ind, og uden dine svar kan vi ikke finde en gruppe til dig. Din termin, din babys navn, svaret om partner eller alenemor og beskeder på telefonen er frivillige.</p>
+
+  <h2>11. Alder</h2>
+  <p>MorInde er kun for dig, der er fyldt 18 år. Du bekræfter det med et flueben, før du går i gang, og vi gemmer, hvornår du gjorde det. Vi spørger ikke om din fødselsdato og tjekker ikke alderen på anden måde. Er du under 18, må du ikke bruge appen.</p>
+
+  <h2>12. Ventelisten og hjemmesiden morinde.com</h2>
+  <p>Skriver du dig på ventelisten på morinde.com, gemmer vi din e-mail, dit postnummer, om du er gravid eller har fået barn, at du har givet samtykke, og hvornår du skrev dig op. Vi beder ikke om dit navn eller dit barns navn på ventelisten. Du har ingen pligt til at skrive dig op. Hvis du ikke gør det, kan vi bare ikke give dig besked.</p>
+  <p>Vi bruger oplysningerne til at give dig besked, når MorInde åbner, til at se, hvor i landet der er interesse, og til at lade beskeden passe til, om du venter eller har født. Vi sender ikke reklamer fra andre, og vi sælger ikke dine oplysninger.</p>
+  <p>Retsgrundlag er dit samtykke (artikel 6, stk. 1, litra a). At du er gravid, kan være en helbredsoplysning. Den behandler vi kun, hvis du har givet dit udtrykkelige samtykke i et separat felt i formularen, som ikke er sat på forhånd (artikel 9, stk. 2, litra a).</p>
+  <p>Oplysningerne gemmes hos Tally BV i Belgien i højst 6 måneder efter din tilmelding. Vi sletter dem manuelt senest da, tidligere når MorInde åbner og du har fået besked, eller hvis du beder om det. Hvis MorInde ikke åbner, sletter vi hele ventelisten.</p>
+  <p>Hjemmesiden hostes hos GitHub. Vi bruger ikke cookies til statistik eller markedsføring, og skrifttyperne ligger på vores egen side. Formularen hentes først fra Tally, når du trykker på “Åbn tilmeldingen”. Tally oplyser, at de ikke bruger cookie tracking. Tally kan gemme et tilfældigt ID i din browser for at kunne genkende en besvarelse. <span class="afklar">[AFKLARES: om Tallys ID i browseren kræver samtykke efter cookiereglerne]</span></p>
+  <p>Du kan trække dit samtykke tilbage og bede om sletning ved at skrive til <a href="mailto:kontakt@morinde.com">kontakt@morinde.com</a>.</p>
+
+  <h2>13. Klage</h2>
+  <p>Er du utilfreds med, hvordan vi passer på dine oplysninger, så skriv først til os. Du kan også altid klage til Datatilsynet.</p>
+  <p>Datatilsynet, Carl Jacobsens Vej 35, 2500 Valby<br>
+  Telefon 33 19 32 00, <a href="mailto:dt@datatilsynet.dk">dt@datatilsynet.dk</a>, <a href="https://www.datatilsynet.dk" target="_blank" rel="noopener">datatilsynet.dk</a></p>
+
+  <h2>14. Hvis teksten ændres</h2>
+  <p>Ændrer vi noget, der betyder noget for dig, giver vi besked i appen, før ændringen træder i kraft. Den nyeste version ligger altid på denne side.</p>
+  <p>Spørgsmål? Skriv til <a href="mailto:kontakt@morinde.com">kontakt@morinde.com</a>.</p>
+
+  <footer>
+    <div class="links">
+      <a href="/">Forside</a>
+      <a href="/support/">Support</a>
+      <a href="/slet-konto/">Slet konto</a>
+      <a href="mailto:kontakt@morinde.com">kontakt@morinde.com</a>
+    </div>
+    Lavet med 💛 af <a href="https://edwebworks.com" target="_blank" rel="noopener">ED.</a>
+  </footer>
 </div>
 </body>
 </html>
